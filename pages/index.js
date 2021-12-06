@@ -25,9 +25,9 @@ export default function Home() {
       <div className="m-10">
         {posts.map((post) => {
           return (
-            <Link href={`/posts/${post.id}`}>
+            <Link key={post.id} href={`/posts/${post.id}`}>
               <a>
-                <div key={post.title} className="card m-10 p-10">
+                <div className="card m-10 p-10">
                   <h2>{post.title}</h2>
                   <p>{post.description}</p>
                 </div>

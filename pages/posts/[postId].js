@@ -7,8 +7,8 @@ export default function Post({ post }) {
       <p>{post.title}</p>
       <p>{post.description}</p>
       <div>
-        {post.comments.map((comment) => {
-          return <div>{comment.content}</div>;
+        {post.comments.map((comment, index) => {
+          return <div key={index}>{comment.content}</div>;
         })}
       </div>
     </div>
