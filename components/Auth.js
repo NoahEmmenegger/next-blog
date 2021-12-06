@@ -64,7 +64,7 @@ export default function Auth({onclick, isRegister}) {
           className="btn"
           onClick={() => {onclick({email, pass})}}
         >
-            { isRegister ? 'Sign-In' : 'Log-In'}
+            { isRegister ? 'Sign-In' : 'Login'}
         </button>
       </div>
   </div>

@@ -40,15 +40,15 @@ export default function Layout({ children }) {
               <Link href="/dashboard">Dashboard</Link>
             </li>
             <li className="px-10 m-auto">
-              <Link href="/register">Register</Link>
+              <Link href="/register">Registrieren</Link>
             </li>
             {auth.user ? (
               <button onClick={auth.signout} className="btn">
-                Sign Out
+                Logout
               </button>
             ) : (
               <Link href="/login">
-                <a className="btn">Log-In</a>
+                <a className="btn">Login</a>
               </Link>
             )}
           </ul>
@@ -73,7 +73,7 @@ export default function Layout({ children }) {
               <Link href="/dashboard">Dashboard</Link>
             </li>
             <li className="m-auto py-3">
-              <Link href="/register">Register</Link>
+              <Link href="/register">Registrieren</Link>
             </li>
           </ul>
           {auth.user ? (
@@ -81,7 +81,7 @@ export default function Layout({ children }) {
               <button
                 onClick={auth.signout}
               >
-                Sign Out
+                Logout
               </button>
             </div>
           ) : (
