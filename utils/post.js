@@ -5,7 +5,7 @@ const createPost = async (ownerId, title, description, status) => {
     ownerId,
     title,
     description,
-    status
+    status,
   });
 };
 
@@ -24,7 +24,9 @@ const getPostById = async (postId) => {
     await firestore.collection("posts").doc(postId).get()
   ).data();
 
-  console.log(post);
+  if (!post) {
+    return null;
+  }
 
   return post;
 };

@@ -1,7 +1,11 @@
 import { getPostById } from "../../utils/post";
+import Custom404 from "../404";
 
 export default function Post({ post }) {
-  console.log(post);
+  if (!post) {
+    return <Custom404 />;
+  }
+
   return (
     <div>
       <p>{post.title}</p>
