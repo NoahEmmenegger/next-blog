@@ -18,6 +18,6 @@
   }
 
   .card {
-    @apply bg-white rounded-3xl shadow-lg
+    @apply bg-white rounded-3xl shadow-lg;
   }
 }
