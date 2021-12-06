@@ -46,7 +46,7 @@ export default function Layout({ children }) {
               <Link href="/create">Create Page</Link>
             </li>
             {auth.user ? (
-              <button onClick={auth.signout} className="px-10 btn">
+              <button onClick={auth.signout} className="btn">
                 Sign Out
               </button>
             ) : (
@@ -83,12 +83,13 @@ export default function Layout({ children }) {
             </li>
           </ul>
           {auth.user ? (
-            <button
-              onClick={auth.signout}
-              className="px-10 btn flex-grow-0 m-auto"
-            >
-              Sign Out
-            </button>
+            <div className="m-2 btn w-1/12">
+              <button
+                onClick={auth.signout}
+              >
+                Sign Out
+              </button>
+            </div>
           ) : (
             <Link href="/login">
               <a className="px-10 btn">Login</a>
