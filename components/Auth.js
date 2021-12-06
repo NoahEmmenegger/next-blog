@@ -25,7 +25,7 @@ export default function Auth({onclick, isRegister}) {
             autoComplete="email"
             required
             className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-            placeholder="Email address"
+            placeholder="Email Adresse"
             onChange={e => {
                 email = e.target.value
             }}
@@ -42,7 +42,7 @@ export default function Auth({onclick, isRegister}) {
             autoComplete="current-password"
             required
             className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-            placeholder="Password"
+            placeholder="Passwort"
             onChange={e => {
                 pass = e.target.value
             }}
@@ -53,7 +53,7 @@ export default function Auth({onclick, isRegister}) {
       <div className="flex items-center justify-between">
         <div className="text-sm">
           <a href="#" className="font-medium text-indigo-600 hover:text-indigo-500">
-            Forgot your password?
+            Passwort vergessen?
           </a>
         </div>
       </div>
