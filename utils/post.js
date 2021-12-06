@@ -1,11 +1,11 @@
 import { firestore } from "./firebase";
 
-const createPost = async (ownerUid, title, description) => {
-  console.log(ownerUid);
+const createPost = async (ownerId, title, description, status) => {
   firestore.collection("posts").doc().set({
-    ownerUid,
-    title: title,
-    description: description,
+    ownerId,
+    title,
+    description,
+    status
   });
 };
 
