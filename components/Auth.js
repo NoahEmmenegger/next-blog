@@ -9,8 +9,8 @@ export default function Auth({onclick, isRegister}) {
   <div className="max-w-md w-full space-y-8">
     <div>
         {isRegister ? 
-            <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">Sign-in to your account</h2> :
-            <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">Log in to your account</h2>
+            <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">Sign-In to your account</h2> :
+            <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">Log-In to your account</h2>
         }
     </div>
       <div className="rounded-md shadow-sm -space-y-px">
@@ -53,7 +53,7 @@ export default function Auth({onclick, isRegister}) {
       <div className="flex items-center justify-between">
         <div className="text-sm">
           <a href="#" className="font-medium text-indigo-600 hover:text-indigo-500">
-            Passwort vergessen?
+            Forgot your Password?
           </a>
         </div>
       </div>
@@ -64,7 +64,7 @@ export default function Auth({onclick, isRegister}) {
           className="btn"
           onClick={() => {onclick({email, pass})}}
         >
-            { isRegister ? 'Sign-In' : 'Login'}
+            { isRegister ? 'Sign-In' : 'Log-In'}
         </button>
       </div>
   </div>
