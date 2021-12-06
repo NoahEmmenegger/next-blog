@@ -1,0 +1,23 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  h1 {
+    @apply text-2xl;
+  }
+  h2 {
+    @apply text-xl;
+  }
+  h3 {
+    @apply text-lg;
+  }
+
+  .btn {
+    @apply block text-white uppercase p-4 font-bold rounded-full bg-primary cursor-pointer hover:bg-primaryDark;
+  }
+
+  .card {
+    @apply bg-white rounded-3xl shadow-lg
+  }
+}
