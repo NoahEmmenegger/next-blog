@@ -37,13 +37,10 @@ export default function Layout({ children }) {
           </div>
           <ul className="float-right align-middle hidden lg:flex">
             <li className="px-10 m-auto">
-              <Link href="/register">Register</Link>
-            </li>
-            <li className="px-10 m-auto">
               <Link href="/dashboard">Dashboard</Link>
             </li>
             <li className="px-10 m-auto">
-              <Link href="/create">Create Page</Link>
+              <Link href="/register">Register</Link>
             </li>
             {auth.user ? (
               <button onClick={auth.signout} className="btn">
@@ -73,13 +70,10 @@ export default function Layout({ children }) {
           </div>
           <ul className="flex flex-col m-auto">
             <li className="m-auto py-3">
-              <Link href="/register">Register</Link>
-            </li>
-            <li className="m-auto py-3">
               <Link href="/dashboard">Dashboard</Link>
             </li>
             <li className="m-auto py-3">
-              <Link href="/create">Create Page</Link>
+              <Link href="/register">Register</Link>
             </li>
           </ul>
           {auth.user ? (
