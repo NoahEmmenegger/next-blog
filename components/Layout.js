@@ -19,7 +19,11 @@ export default function Layout({ children }) {
     <>
       <header>
         <nav className="flex justify-between mx-auto p-5">
-          <h1>next-blog</h1>
+          <Link href="/">
+            <a>
+              <h1>next-blog</h1>
+            </a>
+          </Link>
           <div
             className="relative h-10 w-10 cursor-pointer lg:hidden"
             onClick={() => setIsHamburgerShow(true)}
