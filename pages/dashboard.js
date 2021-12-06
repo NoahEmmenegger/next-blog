@@ -2,9 +2,11 @@ import Head from "next/head";
 import { useAuth } from "../utils/auth";
 import { getPosts, createPost } from "../utils/post";
 import { useState, useEffect } from "react";
+import Modal from "../components/Modal"
 
 export default function Dashboard() {
   const [posts, setPosts] = useState([]);
+  const [isModalOpen, setOpenModal] = useState(false);
   const auth = useAuth();
 
   useEffect(() => {
@@ -15,6 +17,13 @@ export default function Dashboard() {
     posts();
   }, []);
 
+  function openModal(e){
+    e.preventDefault();
+    setOpenModal(true)
+  } 
+
+  // create Post: createPost(auth.userId, 'postTitle', 'postDescription', '0')
+
   return (
     <div>
       <Head>
@@ -23,11 +32,14 @@ export default function Dashboard() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       {auth.userId && (
-          <div className="m-2">
-          <button onClick={() => createPost(auth.userId, 'postTitle', 'postDescription', '0')}>
-              Neuer Post
-          </button>
-        </div>
+        <>
+            <div className="m-2 btn w-1/12">
+                <button onClick={() => openModal}>
+                    Neuer Post
+                </button>
+            </div>
+            {isModalOpen && <Modal />}
+        </>
       )}
       
       <div className="m-10">

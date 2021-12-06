@@ -51,7 +51,7 @@ export default function Layout({ children }) {
               </button>
             ) : (
               <Link href="/login">
-                <a className="px-10 btn">Login</a>
+                <a className="btn">Log-In</a>
               </Link>
             )}
           </ul>

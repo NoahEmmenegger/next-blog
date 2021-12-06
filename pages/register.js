@@ -18,5 +18,5 @@ export default function Home() {
       });
   };
 
-  return <Auth onclick={signUp} />;
+  return <Auth onclick={signUp} isRegister />;
 }
