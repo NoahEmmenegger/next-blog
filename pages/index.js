@@ -25,10 +25,14 @@ export default function Home() {
       <div className="m-10">
         {posts.map((post) => {
           return (
-            <div className="card m-10 p-10">
-              <h2>{post.title}</h2>
-              <p>{post.description}</p>
-            </div>
+            <Link href={`/posts/${post.id}`}>
+              <a>
+                <div key={post.title} className="card m-10 p-10">
+                  <h2>{post.title}</h2>
+                  <p>{post.description}</p>
+                </div>
+              </a>
+            </Link>
           );
         })}
       </div>
