@@ -16,7 +16,7 @@ export default function Layout({ children }) {
   }, [router.route]);
 
   return (
-    <>
+    <div className="min-h-screen flex flex-col">
       <header>
         <nav className="flex justify-between mx-auto p-5">
           <Link href="/">
@@ -91,8 +91,8 @@ export default function Layout({ children }) {
           )}
         </div>
       </header>
-      <main>{children}</main>
+      <main className="min-h-full">{children}</main>
       <Footer />
-    </>
+    </div>
   );
 }

@@ -20,7 +20,7 @@ export default function Admin() {
       <h1>Admin Page</h1>
       <div className="w-1/2 m-auto">
         {posts.map((post) => {
-          return <AdminPost post={post} />;
+          return <AdminPost key={post.id} post={post} />;
         })}
       </div>
     </div>
