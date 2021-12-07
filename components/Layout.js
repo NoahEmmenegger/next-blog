@@ -91,7 +91,7 @@ export default function Layout({ children }) {
           )}
         </div>
       </header>
-      <main className="min-h-full">{children}</main>
+      <main className="h-full my-auto">{children}</main>
       <Footer />
     </div>
   );
