@@ -121,7 +121,7 @@ export default function Dashboard() {
                 </button>
                 <button
                   type="button"
-                  className="btn bg-gray-50 border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                  className="btn border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                   onClick={() => setOpenModal(false)}
                   ref={cancelButtonRef}
                 >
