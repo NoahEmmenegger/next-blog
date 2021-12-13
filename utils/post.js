@@ -39,4 +39,8 @@ const getPostById = async (postId) => {
   return post;
 };
 
-export { getPosts, createPost, getPostById };
+const removePostById = async (postId) => {
+  return await firestore.collection("posts").doc(postId).delete();
+};
+
+export { getPosts, createPost, getPostById, removePostById };

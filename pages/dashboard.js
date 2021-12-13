@@ -7,6 +7,7 @@ import Modal from "../components/Modal";
 
 import Head from "next/head";
 import { Dialog } from "@headlessui/react";
+import AdminPost from "../components/Admin/AdminPost";
 
 export default function Dashboard() {
   const [posts, setPosts] = useState([]);
@@ -134,12 +135,21 @@ export default function Dashboard() {
       )}
 
       <div className="m-10">
-        {posts.map((post) => {
+        {posts.map((post, index) => {
           return (
-            <div key="privatePosts" className="card m-10 p-10">
-              <h2>{post.title}</h2>
-              <p>{post.description}</p>
-            </div>
+            <AdminPost
+              post={post}
+              onUpdatePost={(updatedPost) => {
+                const updatedPosts = [...posts];
+                if (updatedPost) {
+                  updatedPosts[index] = updatedPost;
+                } else {
+                  updatedPosts.splice(index, 1);
+                }
+                setPosts(updatedPosts);
+              }}
+              key={post.id}
+            />
           );
         })}
       </div>

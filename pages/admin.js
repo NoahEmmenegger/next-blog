@@ -19,8 +19,22 @@ export default function Admin() {
     <div>
       <h1>Admin Page</h1>
       <div className="w-1/2 m-auto">
-        {posts.map((post) => {
-          return <AdminPost key={post.id} post={post} />;
+        {posts.map((post, index) => {
+          return (
+            <AdminPost
+              key={post.id}
+              post={post}
+              onUpdatePost={(updatedPost) => {
+                const updatedPosts = [...posts];
+                if (updatedPost) {
+                  updatedPosts[index] = updatedPost;
+                } else {
+                  updatedPosts.splice(index, 1);
+                }
+                setPosts(updatedPosts);
+              }}
+            />
+          );
         })}
       </div>
     </div>
