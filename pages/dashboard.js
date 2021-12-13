@@ -114,7 +114,7 @@ export default function Dashboard() {
                       newPostTitle,
                       newPostDescription,
                       privatePostCheckbox
-                    );
+                    ).then(async () => setPosts(await getPosts()));
                   }}
                 >
                   Save

@@ -1,16 +1,17 @@
 import { firestore, firebase } from "./firebase";
 
 const createPost = async (ownerId, title, description, status) => {
-  firestore
-    .collection("posts")
-    .doc()
-    .set({
-      ownerId,
-      title,
-      description,
-      status,
-      createDate: firebase.firestore.Timestamp.fromDate(new Date()),
-    });
+  let document = firestore.collection("posts").doc();
+
+  await document.set({
+    ownerId,
+    title,
+    description,
+    status,
+    createDate: firebase.firestore.Timestamp.fromDate(new Date()),
+  });
+
+  return await getPostById(document.id);
 };
 
 const getPosts = async () => {
