@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext, createContext } from "react";
 import "firebase/auth";
 
 import { firebase } from "./firebase";
+import { getUserById, updateUser } from "./user";
 
 const authContext = createContext();
 
@@ -17,6 +18,12 @@ export const useAuth = () => {
 function useProvideAuth() {
     const [user, setUser] = useState(null);
 
+    useEffect(() => {
+        if (user) {
+            updateUser(user);
+        }
+    }, [user]);
+
     const signin = (email, password) => {
         return firebase
             .auth()
@@ -27,12 +34,12 @@ function useProvideAuth() {
             });
     };
 
-    const signup = (email, password) => {
+    const signup = (email, password, phone) => {
         return firebase
             .auth()
             .createUserWithEmailAndPassword(email, password)
             .then((response) => {
-                setUser(response.user);
+                setUser({ ...response.user, phone });
                 return response.user;
             });
     };
@@ -81,6 +88,7 @@ function useProvideAuth() {
     return {
         userId: user && user.uid,
         user: user,
+        getAdditionalInformations: async () => getUserById(user.uid),
         signin,
         signup,
         signout,

@@ -1,22 +1,28 @@
 import { useAuth } from "../utils/auth";
 import { useRouter } from "next/router";
 import Auth from "../components/Auth";
+import { useState } from "react";
 
 export default function Home() {
-  const auth = useAuth();
-  const router = useRouter();
+    const auth = useAuth();
+    const router = useRouter();
 
-  const signUp = ({ email, pass }) => {
-    auth
-      .signup(email, pass)
-      .then((user) => {
-        router.push("/dashboard");
-      })
-      .catch((error) => {
-        console.log(error);
-        console.log("An error occurred.");
-      });
-  };
+    const [error, setError] = useState(null);
 
-  return <Auth onclick={signUp} isRegister />;
+    const signUp = ({ email, pass, phone }) => {
+        auth.signup(email, pass, phone)
+            .then((user) => {
+                router.push("/dashboard");
+            })
+            .catch((error) => {
+                console.log(error);
+                setError(error.message);
+            });
+    };
+
+    return (
+        <>
+            <Auth onclick={signUp} isRegister error={error} />
+        </>
+    );
 }
