@@ -1,7 +1,6 @@
 import Head from "next/head";
 import Link from "next/link";
-import Image from "next/image";
-import { getPosts } from "../utils/post";
+import { getPublicPosts } from "../utils/post";
 import { useState, useEffect } from "react";
 
 export default function Home() {
@@ -9,7 +8,7 @@ export default function Home() {
 
   useEffect(() => {
     const posts = async () => {
-      setPosts(await getPosts());
+      setPosts(await getPublicPosts());
     };
 
     posts();
