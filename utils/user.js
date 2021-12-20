@@ -8,6 +8,7 @@ export function updateUser(user) {
             .set({
                 phone: user.phone | "",
                 totpToken: user.totpToken | "",
+                userName: user.username | "",
             })
             .then(() => res(true));
     });

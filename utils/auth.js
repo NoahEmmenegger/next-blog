@@ -17,6 +17,7 @@ export const useAuth = () => {
 
 function useProvideAuth() {
     const [user, setUser] = useState(null);
+    const [additionalInformations, setAdditionalInformations] = useState({});
 
     useEffect(() => {
         if (user) {
@@ -39,7 +40,7 @@ function useProvideAuth() {
             .auth()
             .createUserWithEmailAndPassword(email, password)
             .then((response) => {
-                setUser({ ...response.user, phone });
+                setUser(response.user);
                 return response.user;
             });
     };
