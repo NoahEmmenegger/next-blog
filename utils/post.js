@@ -36,6 +36,8 @@ const getPostById = async (postId) => {
     return null;
   }
 
+  post.createDate = post.createDate.seconds;
+
   return post;
 };
 
