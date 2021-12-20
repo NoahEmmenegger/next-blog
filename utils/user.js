@@ -9,6 +9,7 @@ export function updateUser(userId, user) {
                 phone: user.phone || "",
                 totpToken: user.totpToken || "",
                 userName: user.username || "",
+                isAdmin: user.isAdmin || false,
             })
             .then(() => res(true));
     });
