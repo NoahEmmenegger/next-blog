@@ -9,8 +9,8 @@ export default function Home() {
 
     const [error, setError] = useState(null);
 
-    const signUp = ({ email, pass, phone }) => {
-        auth.signup(email, pass, phone)
+    const signUp = ({ email, pass, phone, username }) => {
+        auth.signup(email, pass, phone, username)
             .then((user) => {
                 router.push("/dashboard");
             })

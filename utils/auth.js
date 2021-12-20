@@ -35,13 +35,13 @@ function useProvideAuth() {
             });
     };
 
-    const signup = (email, password, phone) => {
+    const signup = (email, password, phone, username) => {
         return firebase
             .auth()
             .createUserWithEmailAndPassword(email, password)
             .then((response) => {
                 setUser(response.user);
-                setAdditionalInformations({ phone });
+                setAdditionalInformations({ phone, username });
                 return response.user;
             });
     };

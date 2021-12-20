@@ -3,6 +3,7 @@ import Link from "next/link";
 export default function Auth({ onclick, isRegister, error }) {
     let email = "";
     let pass = "";
+    let username = "";
     let phone = "";
 
     return (
@@ -11,7 +12,7 @@ export default function Auth({ onclick, isRegister, error }) {
             className="min-h-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8"
             onSubmit={(event) => {
                 event.preventDefault();
-                onclick({ email, pass, phone });
+                onclick({ email, pass, phone, username });
                 return false;
             }}
         >
@@ -46,23 +47,41 @@ export default function Auth({ onclick, isRegister, error }) {
                         />
                     </div>
                     {isRegister && (
-                        <div>
-                            <label htmlFor="phone" className="sr-only">
-                                Phone Number
-                            </label>
-                            <input
-                                id="phone"
-                                name="phone"
-                                type="tel"
-                                autoComplete="phone"
-                                required
-                                className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-                                placeholder="phone"
-                                onChange={(e) => {
-                                    phone = e.target.value;
-                                }}
-                            />
-                        </div>
+                        <>
+                            <div>
+                                <label htmlFor="phone" className="sr-only">
+                                    Username
+                                </label>
+                                <input
+                                    id="username"
+                                    name="username"
+                                    required
+                                    autoComplete="name"
+                                    className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                                    placeholder="username"
+                                    onChange={(e) => {
+                                        phone = e.target.value;
+                                    }}
+                                />
+                            </div>
+                            <div>
+                                <label htmlFor="phone" className="sr-only">
+                                    Phone Number
+                                </label>
+                                <input
+                                    id="phone"
+                                    name="phone"
+                                    type="tel"
+                                    autoComplete="phone"
+                                    required
+                                    className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                                    placeholder="phone"
+                                    onChange={(e) => {
+                                        phone = e.target.value;
+                                    }}
+                                />
+                            </div>
+                        </>
                     )}
                     <div>
                         <label htmlFor="password" className="sr-only">
