@@ -39,9 +39,15 @@ export default function Layout({ children }) {
             <li className="px-10 m-auto">
               <Link href="/dashboard">Dashboard</Link>
             </li>
-            <li className="px-10 m-auto">
-              <Link href="/register">Register</Link>
-            </li>
+            {
+              auth.user ? (
+                <></>
+              ) : (
+                <li className="px-10 m-auto">
+                <Link href="/register">Register</Link>
+              </li>
+              )
+            }
             {auth.user ? (
               <button onClick={auth.signout} className="btn">
                 Logout
