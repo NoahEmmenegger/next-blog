@@ -41,6 +41,7 @@ function useProvideAuth() {
             .createUserWithEmailAndPassword(email, password)
             .then((response) => {
                 setUser(response.user);
+                setAdditionalInformations({ phone });
                 return response.user;
             });
     };
