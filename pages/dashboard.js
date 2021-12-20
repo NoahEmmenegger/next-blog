@@ -15,10 +15,6 @@ export default function Dashboard() {
   const auth = useAuth();
   const cancelButtonRef = useRef(null);
 
-  let newPostTitle = "";
-  let newPostDescription = "";
-  let privatePostCheckbox = false;
-
   useEffect(() => {
     const posts = async () => {
       setPosts(await getPosts());
@@ -26,6 +22,9 @@ export default function Dashboard() {
 
     posts();
   }, []);
+
+  let newPostTitle = '';
+  let newPostDescription = '';
 
   return (
     <div>
@@ -80,25 +79,6 @@ export default function Dashboard() {
                             />
                           </div>
                         </div>
-                        <section className="container mx-0 p-5">
-                          <label
-                            htmlFor="checkbox"
-                            className="relative flex-inline items-center isolate p-4 rounded-2xl"
-                          >
-                            <input
-                              id="checkbox"
-                              type="checkbox"
-                              onChange={(e) => {
-                                privatePostCheckbox = e.target.value;
-                              }}
-                              className="relative peer z-20 text-purple-600 rounded-md focus:ring-0"
-                            />
-                            <span className="ml-2 relative z-20">
-                              private post
-                            </span>
-                            <div className="absolute inset-0 bg-white peer-checked:bg-purple-50 peer-checked:border-purple-300 z-10 border rounded-2xl"></div>
-                          </label>
-                        </section>
                       </div>
                     </p>
                   </div>
@@ -114,7 +94,7 @@ export default function Dashboard() {
                       auth.userId,
                       newPostTitle,
                       newPostDescription,
-                      privatePostCheckbox
+                      "private"
                     ).then(async () => setPosts(await getPosts()));
                   }}
                 >
@@ -134,6 +114,7 @@ export default function Dashboard() {
         </>
       )}
 
+{posts ? (
       <div className="m-10">
         {posts.map((post, index) => {
           return (
@@ -153,6 +134,8 @@ export default function Dashboard() {
           );
         })}
       </div>
+) : <h2>no posts available</h2>
+}
     </div>
   );
 }
