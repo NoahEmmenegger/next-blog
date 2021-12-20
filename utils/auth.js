@@ -1,11 +1,11 @@
-import React, {useState, useEffect, useContext, createContext} from 'react';
-import 'firebase/auth';
+import React, { useState, useEffect, useContext, createContext } from "react";
+import "firebase/auth";
 
-import { firebase } from './firebase';
+import { firebase } from "./firebase";
 
 const authContext = createContext();
 
-export function ProvideAuth({children}) {
+export function ProvideAuth({ children }) {
     const auth = useProvideAuth();
     return <authContext.Provider value={auth}>{children}</authContext.Provider>;
 }
@@ -56,7 +56,7 @@ function useProvideAuth() {
     };
 
     const confirmPasswordReset = (password, code) => {
-        const resetCode = code || getFromQueryString('oobCode');
+        const resetCode = code || getFromQueryString("oobCode");
 
         return firebase
             .auth()
