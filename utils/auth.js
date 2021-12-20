@@ -17,13 +17,13 @@ export const useAuth = () => {
 
 function useProvideAuth() {
     const [user, setUser] = useState(null);
-    const [additionalInformations, setAdditionalInformations] = useState({});
+    const [additionalInformations, setAdditionalInformations] = useState(null);
 
     useEffect(() => {
-        if (user) {
-            updateUser(user);
+        if (additionalInformations) {
+            updateUser(user.uid, additionalInformations);
         }
-    }, [user]);
+    }, [additionalInformations]);
 
     const signin = (email, password) => {
         return firebase
@@ -89,7 +89,8 @@ function useProvideAuth() {
     return {
         userId: user && user.uid,
         user: user,
-        getAdditionalInformations: async () => getUserById(user.uid),
+        additionalInformations,
+        setAdditionalInformations,
         signin,
         signup,
         signout,

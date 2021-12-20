@@ -1,14 +1,14 @@
 import { firestore } from "./firebase";
 
-export function updateUser(user) {
+export function updateUser(userId, user) {
     return new Promise((res, rej) => {
         firestore
             .collection("users")
-            .doc(user.uid)
+            .doc(userId)
             .set({
-                phone: user.phone | "",
-                totpToken: user.totpToken | "",
-                userName: user.username | "",
+                phone: user.phone || "",
+                totpToken: user.totpToken || "",
+                userName: user.username || "",
             })
             .then(() => res(true));
     });
