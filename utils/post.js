@@ -26,6 +26,18 @@ const getPosts = async () => {
   });
 };
 
+const getUserPostsById = async (userId) => {
+  const snapshot = await firestore
+    .collection("posts")
+    .where("ownerId","==",userId)
+    .get();
+  return snapshot.docs.map((doc) => {
+    let post = doc.data();
+    post.id = doc.id;
+    return post;
+  });
+};
+
 const getPostById = async (postId) => {
   console.log(postId);
   const post = await (
@@ -45,4 +57,4 @@ const removePostById = async (postId) => {
   return await firestore.collection("posts").doc(postId).delete();
 };
 
-export { getPosts, createPost, getPostById, removePostById };
+export { getPosts, createPost, getPostById, getUserPostsById, removePostById };
