@@ -36,9 +36,13 @@ export default function Layout({ children }) {
             />
           </div>
           <ul className="float-right align-middle hidden lg:flex">
+         { !auth.user ? (
+                <></>
+          ) : (
             <li className="px-10 m-auto">
               <Link href="/dashboard">Dashboard</Link>
             </li>
+          )}
             {
               auth.user ? (
                 <></>

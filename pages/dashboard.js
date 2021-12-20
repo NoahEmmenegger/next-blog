@@ -8,6 +8,7 @@ import Modal from "../components/Modal";
 import Head from "next/head";
 import { Dialog } from "@headlessui/react";
 import AdminPost from "../components/Admin/AdminPost";
+import Link from "next/link";
 
 export default function Dashboard() {
   const [posts, setPosts] = useState([]);
@@ -23,6 +24,15 @@ export default function Dashboard() {
     posts();
   }, [auth.userId]);
 
+  if(!posts){
+    createPost(
+      auth?.userId,
+      "you don't have any posts yet!",
+      "delete this one and create your first post with the button on your left :)",
+      "private"
+    )
+  }
+
   let newPostTitle = '';
   let newPostDescription = '';
 
@@ -33,7 +43,7 @@ export default function Dashboard() {
         <meta name="description" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      {auth.userId && (
+      {auth.userId ? (
         <>
           <div className="m-2 btn w-1/12">
             <button onClick={() => setOpenModal(true)}>New Post</button>
@@ -91,7 +101,7 @@ export default function Dashboard() {
                   onClick={() => {
                     setOpenModal(false);
                     createPost(
-                      auth.userId,
+                      auth?.userId,
                       newPostTitle,
                       newPostDescription,
                       "private"
@@ -111,6 +121,32 @@ export default function Dashboard() {
               </div>
             </>
           </Modal>
+        </>
+      ) : (
+        <>
+        <div className="w-1/2 m-auto">
+        <h2>You are not Logged In</h2>
+        <div className="flex items-center">
+                  <div className="btn m-2">
+                      <Link
+                          href="/login"
+                          className="font-medium text-indigo-600 hover:text-indigo-500"
+                      >
+                          Login
+                      </Link>
+                  </div>
+              </div>
+              <div className="flex items-center">
+              <div className="btn m-2">
+                  <Link
+                          href="/#"
+                          className="font-medium text-indigo-600 hover:text-indigo-500"
+                      >
+                          public Dashboard
+                      </Link>
+                  </div>
+              </div>
+        </div>
         </>
       )}
 

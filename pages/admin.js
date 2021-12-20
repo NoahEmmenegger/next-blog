@@ -1,11 +1,12 @@
 import { useState, useEffect } from "react";
 import { getPosts } from "../utils/post";
+import { useAuth } from "../utils/auth";
 import Link from "next/link";
-import Image from "next/image";
 import AdminPost from "../components/Admin/AdminPost";
 
 export default function Admin() {
   const [posts, setPosts] = useState([]);
+  const auth = useAuth();
 
   useEffect(() => {
     const posts = async () => {
@@ -14,11 +15,12 @@ export default function Admin() {
 
     posts();
   }, []);
-
   return (
-    <div>
-      <h1>Admin Page</h1>
-      <div className="w-1/2 m-auto">
+    <div className="w-1/2 m-auto">
+      <h1>Admin Dashboard</h1>
+      {
+        auth?.additionalInformations?.isAdmin ? (
+          <div className="w-1/2 m-auto flex items-center">
         {posts.map((post, index) => {
           return (
             <AdminPost
@@ -37,6 +39,22 @@ export default function Admin() {
           );
         })}
       </div>
+        ) : (
+          <>
+          <h2>You are not an admin</h2>
+          <div className="flex items-center">
+                    <div className="btn">
+                        <Link
+                            href="/dashboard"
+                            className="font-medium text-indigo-600 hover:text-indigo-500"
+                        >
+                            return to Dashboard
+                        </Link>
+                    </div>
+                </div>
+          </>
+        )
+      }
     </div>
   );
 }
