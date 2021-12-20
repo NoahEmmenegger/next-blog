@@ -25,6 +25,16 @@ function useProvideAuth() {
         }
     }, [additionalInformations]);
 
+    useEffect(() => {
+        async function init() {
+            if (user) {
+                setAdditionalInformations(await getUserById(user.uid));
+            }
+        }
+
+        init();
+    }, [user]);
+
     const signin = (email, password) => {
         return firebase
             .auth()
