@@ -18,6 +18,9 @@ export default function Layout({ children }) {
   return (
     <div className="min-h-screen flex flex-col">
       <header>
+        {auth.additionalInformations && auth.additionalInformations.isAdmin && <div className="bg-blue-300 text-white m-auto text-center">
+          You are an Administrator. You can find the admin dashboard <Link href="/admin"><a className="underline">here</a></Link>!
+        </div>}
         <nav className="flex justify-between mx-auto p-5">
           <Link href="/">
             <a>
