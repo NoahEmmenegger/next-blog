@@ -8,7 +8,7 @@ export function updateUser(userId, user) {
             .set({
                 phone: user.phone || "",
                 totpToken: user.totpToken || "",
-                userName: user.username || "",
+                username: user.username || "",
                 isAdmin: user.isAdmin || false,
             })
             .then(() => res(true));
@@ -21,7 +21,12 @@ export async function getUserById(userId) {
     ).data();
 
     if (!user) {
-        return null;
+        return {
+            phone: "",
+            totpToken: "",
+            username: "",
+            isAdmin: false,
+        };
     }
 
     return user;
