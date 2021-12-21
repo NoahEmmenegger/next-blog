@@ -42,7 +42,6 @@ export default function Post({ post }) {
 
 export async function getServerSideProps({ params }) {
   let post = await getPostById(params.postId);
-  console.log(post);
   return {
     props: {
       post,

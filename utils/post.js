@@ -51,7 +51,6 @@ const getPublicPosts = async () => {
 };
 
 const getPostById = async (postId) => {
-    console.log(postId);
     const post = await (
         await firestore.collection("posts").doc(postId).get()
     ).data();
@@ -61,9 +60,19 @@ const getPostById = async (postId) => {
     }
 
     post.createDate = post.createDate.seconds;
+    post.comments = await getPostComments(postId);
 
     return post;
 };
+
+const getPostComments = async (postId) => {
+    const snapshot = await firestore.collection("posts").doc(postId).collection('comments').get()
+    return snapshot.docs.map((doc) => {
+        let comment = doc.data();
+        comment.id = doc.id;
+        return comment;
+    });
+}
 
 const removePostById = async (postId) => {
     return await firestore.collection("posts").doc(postId).delete();
