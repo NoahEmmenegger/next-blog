@@ -18,7 +18,9 @@ export default function Dashboard() {
 
   useEffect(() => {
     const posts = async () => {
-      setPosts(await getUserPostsById(auth.userId));
+      if(auth.userId) {
+        setPosts(await getUserPostsById(auth.userId));
+      }
     };
 
     posts();
