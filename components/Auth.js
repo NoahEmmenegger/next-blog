@@ -30,11 +30,11 @@ export default function Auth({ onclick, isRegister, error }) {
                 </div>
                 <div className="rounded-md shadow-sm -space-y-px">
                     <div>
-                        <label htmlFor="email-address" className="sr-only">
+                        <label htmlFor="email" className="sr-only">
                             Email address
                         </label>
                         <input
-                            id="email-address"
+                            id="email"
                             name="email"
                             type="email"
                             autoComplete="email"
@@ -53,12 +53,12 @@ export default function Auth({ onclick, isRegister, error }) {
                                     Username
                                 </label>
                                 <input
-                                    id="username"
-                                    name="username"
+                                    id="displayname"
+                                    name="displayname"
                                     required
-                                    autoComplete="name"
+                                    autoComplete="display-name"
                                     className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-                                    placeholder="username"
+                                    placeholder="displayname"
                                     onChange={(e) => {
                                         username = e.target.value;
                                     }}
