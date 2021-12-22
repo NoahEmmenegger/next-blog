@@ -23,7 +23,7 @@ export default function Admin() {
           <div className="m-auto flex flex-col items-center">
         {posts.map((post, index) => {
           return (
-            <div className="w-full">
+            <div key={index} className="w-full">
               <AdminPost
               key={post.id}
               post={post}
