@@ -45,6 +45,17 @@ function useProvideAuth() {
             });
     };
 
+    const signinWithProvider = () => {
+        return firebase
+            .auth()
+            .signInWithPopup(new firebase.auth.GoogleAuthProvider())
+            .then((response) => {
+                setUser(response.user);
+                setAdditionalInformations({ username:  response.user.displayName})
+                return response.user;
+            });
+    }
+
     const signup = (email, password, phone, username) => {
         return firebase
             .auth()
@@ -103,6 +114,7 @@ function useProvideAuth() {
         additionalInformations,
         setAdditionalInformations,
         signin,
+        signinWithProvider,
         signup,
         signout,
         sendPasswordResetEmail,

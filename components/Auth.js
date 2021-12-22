@@ -1,6 +1,11 @@
 import Link from "next/link";
+import { useAuth } from "../utils/auth";
+import { useRouter } from 'next/router';
 
 export default function Auth({ onclick, isRegister, error }) {
+    const {signinWithProvider} = useAuth()
+    const router = useRouter();
+    
     let email = "";
     let pass = "";
     let username = "";
@@ -122,6 +127,13 @@ export default function Auth({ onclick, isRegister, error }) {
                         value={isRegister ? "Sign-In" : "Log-In"}
                     />
                 </div>
+                <input type="button" value="google" onClick={() => signinWithProvider().then(() => {
+                    router.push('/dashboard');
+                })
+                .catch((error) => {
+                    console.log(error)
+                    console.log('An error occurred.')
+                })} />
             </div>
         </form>
     );
