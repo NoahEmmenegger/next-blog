@@ -20,10 +20,11 @@ export default function Admin() {
       <h1>Admin Dashboard</h1>
       {
         auth?.additionalInformations?.isAdmin ? (
-          <div className="w-1/2 m-auto flex items-center">
+          <div className="m-auto flex flex-col items-center">
         {posts.map((post, index) => {
           return (
-            <AdminPost
+            <div className="w-full">
+              <AdminPost
               key={post.id}
               post={post}
               onUpdatePost={(updatedPost) => {
@@ -36,6 +37,7 @@ export default function Admin() {
                 setPosts(updatedPosts);
               }}
             />
+            </div>
           );
         })}
       </div>

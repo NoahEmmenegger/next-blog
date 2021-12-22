@@ -2,12 +2,13 @@ import { useState, useRef } from "react";
 import Image from "next/image";
 import Modal from "../Modal";
 import { Dialog } from "@headlessui/react";
-import { createPost, removePostById } from "../../utils/post";
-import { useAuth } from "../../utils/auth";
+import { removePostById, updatePost } from "../../utils/post";
 
 export default function AdminPost({ post, onUpdatePost }) {
     const [isHover, setIsHover] = useState(false);
     const [isModalOpen, setOpenModal] = useState(false);
+    const [newPost, setNewPost] = useState(post)
+
     const cancelButtonRef = useRef(null);
     if (!post) {
         post = {};
@@ -15,10 +16,6 @@ export default function AdminPost({ post, onUpdatePost }) {
         post.title = "this post has no title";
         post.description = "this post has no description";
     }
-    let newPostTitle = post.title;
-    let newPostDescription = post.description;
-    let privatePostCheckbox = false;
-    const auth = useAuth();
 
     return post ? (
         <div
@@ -80,10 +77,10 @@ export default function AdminPost({ post, onUpdatePost }) {
                                                 required
                                                 className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                                                 placeholder="Title"
+                                                value={newPost.title}
                                                 ini
                                                 onChange={(e) => {
-                                                    newPostTitle =
-                                                        e.target.value;
+                                                    setNewPost({...newPost, title: e.target.value})
                                                 }}
                                             />
                                         </div>
@@ -96,9 +93,9 @@ export default function AdminPost({ post, onUpdatePost }) {
                                                     required
                                                     className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                                                     placeholder="Description"
+                                                    value={newPost.description}
                                                     onChange={(e) => {
-                                                        newPostDescription =
-                                                            e.target.value;
+                                                        setNewPost({...newPost, description: e.target.value})
                                                     }}
                                                 />
                                             </div>
@@ -113,13 +110,13 @@ export default function AdminPost({ post, onUpdatePost }) {
                                                     id="checkbox"
                                                     type="checkbox"
                                                     onChange={(e) => {
-                                                        privatePostCheckbox =
-                                                            e.target.value;
+                                                        setNewPost({...newPost, status: e.target.checked?"public":"private"})
                                                     }}
+                                                    checked={newPost.status==="public"}
                                                     className="relative peer z-20 text-purple-600 rounded-md focus:ring-0"
                                                 />
                                                 <span className="ml-2 relative z-20">
-                                                    post status
+                                                    Is public?
                                                 </span>
                                                 <div className="absolute inset-0 bg-white peer-checked:bg-purple-50 peer-checked:border-purple-300 z-10 border rounded-2xl"></div>
                                             </label>
@@ -136,12 +133,10 @@ export default function AdminPost({ post, onUpdatePost }) {
                             className="btn"
                             onClick={() => {
                                 setOpenModal(false);
-                                createPost(
-                                    auth.userId,
-                                    newPostTitle,
-                                    newPostDescription,
-                                    privatePostCheckbox
+                                updatePost(
+                                    newPost
                                 );
+                                onUpdatePost(newPost)
                             }}
                         >
                             Save

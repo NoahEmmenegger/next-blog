@@ -78,6 +78,16 @@ const removePostById = async (postId) => {
     return await firestore.collection("posts").doc(postId).delete();
 };
 
+const updatePost = async (post) => {
+    return new Promise((res, rej) => {
+        firestore
+            .collection("posts")
+            .doc(post.id)
+            .set(post)
+            .then(() => res(true));
+    });
+}
+
 export {
     getPosts,
     createPost,
@@ -85,4 +95,5 @@ export {
     getUserPostsById,
     getPublicPosts,
     removePostById,
+    updatePost
 };
