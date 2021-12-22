@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 
 import { useAuth } from "../utils/auth";
-import { getPosts, createPost, getUserPostsById } from "../utils/post";
+import { createPost, getUserPostsById } from "../utils/post";
 
 import Modal from "../components/Modal";
 
@@ -107,7 +107,7 @@ export default function Dashboard() {
                       newPostTitle,
                       newPostDescription,
                       "private"
-                    ).then(async () => setPosts(await getPosts()));
+                    ).then(async () => setPosts(await getUserPostsById(auth.userId)));
                   }}
                 >
                   Save

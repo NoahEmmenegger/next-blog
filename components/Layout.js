@@ -104,7 +104,7 @@ export default function Layout({ children }) {
           )}
         </div>
       </header>
-      <main className="h-full my-auto">{children}</main>
+      <main className="h-full my-auto">{auth.userId !== null && children}</main>
       <Footer />
     </div>
   );
