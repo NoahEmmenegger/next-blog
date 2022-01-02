@@ -1,15 +1,16 @@
 import Link from "next/link";
 import { useAuth } from "../utils/auth";
-import { useRouter } from 'next/router';
+import { useRouter } from "next/router";
+import { useState } from "react";
 
 export default function Auth({ onclick, isRegister, error }) {
-    const {signinWithProvider} = useAuth()
+    const { signinWithProvider } = useAuth();
     const router = useRouter();
-    
-    let email = "";
-    let pass = "";
-    let username = "";
-    let phone = "";
+
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const [username, setUsername] = useState("");
+    const [phone, setPhone] = useState("");
 
     return (
         <form
@@ -17,7 +18,7 @@ export default function Auth({ onclick, isRegister, error }) {
             className="min-h-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8"
             onSubmit={(event) => {
                 event.preventDefault();
-                onclick({ email, pass, phone, username });
+                onclick({ email, password, phone, username });
                 return false;
             }}
         >
@@ -47,7 +48,7 @@ export default function Auth({ onclick, isRegister, error }) {
                             className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                             placeholder="Email Adresse"
                             onChange={(e) => {
-                                email = e.target.value;
+                                setEmail(e.target.value);
                             }}
                         />
                     </div>
@@ -65,7 +66,7 @@ export default function Auth({ onclick, isRegister, error }) {
                                     className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                                     placeholder="displayname"
                                     onChange={(e) => {
-                                        username = e.target.value;
+                                        setUsername(e.target.value);
                                     }}
                                 />
                             </div>
@@ -82,7 +83,7 @@ export default function Auth({ onclick, isRegister, error }) {
                                     className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                                     placeholder="phone"
                                     onChange={(e) => {
-                                        phone = e.target.value;
+                                        setPhone(e.target.value);
                                     }}
                                 />
                             </div>
@@ -101,7 +102,7 @@ export default function Auth({ onclick, isRegister, error }) {
                             className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                             placeholder="Passwort"
                             onChange={(e) => {
-                                pass = e.target.value;
+                                setPassword(e.target.value);
                             }}
                         />
                     </div>
@@ -127,13 +128,20 @@ export default function Auth({ onclick, isRegister, error }) {
                         value={isRegister ? "Sign-In" : "Log-In"}
                     />
                 </div>
-                <input type="button" value="google" onClick={() => signinWithProvider().then(() => {
-                    router.push('/dashboard');
-                })
-                .catch((error) => {
-                    console.log(error)
-                    console.log('An error occurred.')
-                })} />
+                <input
+                    type="button"
+                    value="google"
+                    onClick={() =>
+                        signinWithProvider()
+                            .then(() => {
+                                router.push("/dashboard");
+                            })
+                            .catch((error) => {
+                                console.log(error);
+                                console.log("An error occurred.");
+                            })
+                    }
+                />
             </div>
         </form>
     );

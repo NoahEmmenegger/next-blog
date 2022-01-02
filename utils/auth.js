@@ -3,6 +3,7 @@ import "firebase/auth";
 
 import { firebase } from "./firebase";
 import { getUserById, updateUser } from "./user";
+import { protectedCodes } from "../pages/api/sms";
 
 const authContext = createContext();
 
@@ -36,6 +37,12 @@ function useProvideAuth() {
     }, [user]);
 
     const signin = (email, password) => {
+        console.log(phone, code);
+        if (protectedCodes[phone] != code || true /* remove */) {
+            return new Promise((req, res) =>
+                res({ message: "Wrong phone number code" })
+            );
+        }
         return firebase
             .auth()
             .signInWithEmailAndPassword(email, password)
@@ -51,12 +58,14 @@ function useProvideAuth() {
             .signInWithPopup(new firebase.auth.GoogleAuthProvider())
             .then((response) => {
                 setUser(response.user);
-                setAdditionalInformations({ username:  response.user.displayName})
+                setAdditionalInformations({
+                    username: response.user.displayName,
+                });
                 return response.user;
             });
-    }
+    };
 
-    const signup = (email, password, phone, username) => {
+    const signup = ({ email, password, phone, username, code }) => {
         return firebase
             .auth()
             .createUserWithEmailAndPassword(email, password)

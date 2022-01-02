@@ -10,17 +10,33 @@ export default function Home() {
 
     const [error, setError] = useState(null);
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const [userObject, setUserObject] = useState({});
 
-    const signUp = ({ email, pass, phone, username }) => {
+    const signUp = (user) => {
         setIsModalOpen(true);
+        setUserObject(user);
+        fetch("/api/sms", {
+            method: "post",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ phone: user.phone }),
+        })
+            .then(console.log)
+            .catch((error) => {
+                console.log(error);
+            });
         return;
-        auth.signup(email, pass, phone, username)
+    };
+
+    const verify = () => {
+        auth.signup(userObject)
             .then((user) => {
                 router.push("/dashboard");
             })
             .catch((error) => {
-                console.log(error);
                 setError(error.message);
+                setIsModalOpen(false);
             });
     };
 
@@ -36,15 +52,17 @@ export default function Home() {
                 <input
                     type="text"
                     placeholder="Code"
+                    value={userObject.code}
+                    onChange={(e) => {
+                        setUserObject({ ...userObject, code: e.target.value });
+                    }}
                     className="my-10 border-2"
                 />
                 <input
                     type="button"
                     value="Account endgültig erstellen"
                     className="btn"
-                    onClick={(event) => {
-                        console.log(event);
-                    }}
+                    onClick={verify}
                 />
             </Modal>
             <Auth onclick={signUp} isRegister error={error} />
