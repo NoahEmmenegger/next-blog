@@ -11,8 +11,8 @@ export default function Home() {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [userObject, setUserObject] = useState({});
 
-    const signIn = () => {
-        auth.signin(userObject)
+    const signIn = ({ email, password }) => {
+        auth.signin(email, password)
             .then(() => {
                 router.push("/dashboard");
             })
@@ -63,7 +63,7 @@ export default function Home() {
                     onClick={signIn}
                 />
             </Modal>
-            <Auth onclick={verify} />
+            <Auth onclick={signIn} />
         </>
     );
 }

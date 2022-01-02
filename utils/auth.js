@@ -37,12 +37,12 @@ function useProvideAuth() {
     }, [user]);
 
     const signin = (email, password) => {
-        console.log(phone, code);
-        if (protectedCodes[phone] != code || true /* remove */) {
-            return new Promise((req, res) =>
-                res({ message: "Wrong phone number code" })
-            );
-        }
+        // console.log(phone, code);
+        // if (protectedCodes[phone] != code || true /* remove */) {
+        //     return new Promise((req, res) =>
+        //         res({ message: "Wrong phone number code" })
+        //     );
+        // }
         return firebase
             .auth()
             .signInWithEmailAndPassword(email, password)
