@@ -14,10 +14,8 @@ export default function Home() {
 
     const signIn = ({ email, password }) => {
         auth.signin(email, password)
-            .then((user) => {
-                console.log("second");
-                console.log(user);
-                sendSms(user);
+            .then(() => {
+                sendSms();
             })
             .catch((error) => {
                 console.log(error);
@@ -25,8 +23,9 @@ export default function Home() {
             });
     };
 
-    const sendSms = (user) => {
+    const sendSms = () => {
         setIsModalOpen(true);
+        console.log(auth.additionalInformations);
         fetch("/api/sms", {
             method: "post",
             headers: {
@@ -34,7 +33,7 @@ export default function Home() {
             },
             body: JSON.stringify({
                 phone: auth.additionalInformations.phone,
-                userId: user.uid,
+                userId: auth.user.uid,
             }),
         })
             .then(console.log)
@@ -57,7 +56,8 @@ export default function Home() {
         })
             .then((result) => {
                 if (result.status == 200) {
-                    setVerifError("Yeeeah, it matches!!!");
+                    setVerifError("");
+                    auth.setIsFullyAuthenticated(true);
                     router.push("/dashboard");
                 } else {
                     setVerifError("Does not match");

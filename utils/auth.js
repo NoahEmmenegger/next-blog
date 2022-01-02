@@ -43,20 +43,11 @@ function useProvideAuth() {
     }, [user]);
 
     const signin = async (email, password) => {
-        // console.log(phone, code);
-        // if (protectedCodes[phone] != code || true /* remove */) {
-        //     return new Promise((req, res) =>
-        //         res({ message: "Wrong phone number code" })
-        //     );
-        // }
-        return firebase
+        const response = await firebase
             .auth()
-            .signInWithEmailAndPassword(email, password)
-            .then((response) => {
-                console.log("first");
-                setUser(response.user);
-                return response.user;
-            });
+            .signInWithEmailAndPassword(email, password);
+        setUser(response.user);
+        return response.user;
     };
 
     const signinWithProvider = () => {
@@ -132,6 +123,7 @@ function useProvideAuth() {
         user: user,
         additionalInformations,
         isFullyAuthenticated,
+        setIsFullyAuthenticated,
         setAdditionalInformations,
         signin,
         signinWithProvider,

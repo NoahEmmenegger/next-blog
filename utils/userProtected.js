@@ -26,7 +26,6 @@ export async function getProtected(userId) {
 }
 
 export function updateSecret(userId, code) {
-    console.log("joo");
     return new Promise((res, rej) => {
         firestore
             .collection("users")
@@ -52,8 +51,6 @@ export async function getSecrets(userId) {
             .doc("secrets")
             .get()
     ).data();
-
-    console.log(user);
 
     if (!user) {
         return {

@@ -7,14 +7,13 @@ import { updateSecret } from "../../../utils/userProtected";
 
 export default async function handler(req, res) {
     const { phone, userId } = req.body;
-    console.log(phone, userId);
     // validate phone number
 
     await firebase
         .auth()
         .signInWithEmailAndPassword("backend@gmail.com", "backend");
 
-    const code = generateConfirmationCode(1);
+    const code = generateConfirmationCode(5);
 
     const result = await sendConfirmationSms(phone, code);
     if (result.status !== 204) {
