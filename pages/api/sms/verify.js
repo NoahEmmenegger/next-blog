@@ -1,11 +1,11 @@
 import { protectedCodes } from ".";
-import { getProtected } from "../../../utils/userProtected";
+import { getSecrets } from "../../../utils/userProtected";
 
 export default async function verify(req, res) {
     const { userId, providedCode } = req.body;
 
-    const protectedObj = await getProtected(userId);
-    if (protectedObj.smsCode == providedCode) {
+    const secretObj = await getSecrets(userId);
+    if (secretObj.sms.code == providedCode) {
         res.status(200).json({
             message: 200,
         });
