@@ -5,6 +5,7 @@ import { firebase } from "./firebase";
 import { getUserById, updateUser } from "./user";
 import { protectedCodes } from "../pages/api/sms";
 import { getProtected, updateProtected } from "./userProtected";
+import { useRouter } from "next/router";
 
 const authContext = createContext();
 
@@ -21,6 +22,7 @@ function useProvideAuth() {
     const [user, setUser] = useState(null);
     const [additionalInformations, setAdditionalInformations] = useState(null);
     const [isFullyAuthenticated, setIsFullyAuthenticated] = useState(false);
+    const router = useRouter();
 
     useEffect(() => {
         if (additionalInformations) {
@@ -86,10 +88,11 @@ function useProvideAuth() {
         return firebase
             .auth()
             .signOut()
-            .then(() => {
-                updateProtected(user.uid, { smsAuth: false });
+            .then(async () => {
                 setUser(false);
+                router.push("/");
                 setIsFullyAuthenticated(false);
+                await updateProtected(user.uid, { smsAuth: false });
             });
     };
 

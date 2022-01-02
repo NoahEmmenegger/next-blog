@@ -45,7 +45,7 @@ export default function Dashboard() {
                 <meta name="description" />
                 <link rel="icon" href="/favicon.ico" />
             </Head>
-            {auth.isFullyAuthenticated ? (
+            {auth.user && auth.isFullyAuthenticated ? (
                 <>
                     <div className="m-2 btn w-1/12">
                         <button onClick={() => setOpenModal(true)}>
