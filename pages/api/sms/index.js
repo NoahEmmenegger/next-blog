@@ -2,11 +2,17 @@ import {
     generateConfirmationCode,
     sendConfirmationSms,
 } from "../../../utils/sms";
+import { firebase } from "../../../utils/firebase";
 import { updateSecret } from "../../../utils/userProtected";
 
 export default async function handler(req, res) {
     const { phone, userId } = req.body;
+    console.log(phone, userId);
     // validate phone number
+
+    await firebase
+        .auth()
+        .signInWithEmailAndPassword("backend@gmail.com", "backend");
 
     const code = generateConfirmationCode(1);
 
@@ -16,7 +22,7 @@ export default async function handler(req, res) {
             message: "This phone number is not whitelisted!",
         });
     } else {
-        updateSecret(userId, code);
+        await updateSecret(userId, code);
         res.status(200).json({
             message: 200,
         });

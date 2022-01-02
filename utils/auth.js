@@ -3,7 +3,6 @@ import "firebase/auth";
 
 import { firebase } from "./firebase";
 import { getUserById, updateUser } from "./user";
-import { protectedCodes } from "../pages/api/sms";
 import { getProtected, updateProtected } from "./userProtected";
 import { useRouter } from "next/router";
 
@@ -43,7 +42,7 @@ function useProvideAuth() {
         init();
     }, [user]);
 
-    const signin = (email, password) => {
+    const signin = async (email, password) => {
         // console.log(phone, code);
         // if (protectedCodes[phone] != code || true /* remove */) {
         //     return new Promise((req, res) =>
@@ -54,7 +53,7 @@ function useProvideAuth() {
             .auth()
             .signInWithEmailAndPassword(email, password)
             .then((response) => {
-                console.log(response);
+                console.log("first");
                 setUser(response.user);
                 return response.user;
             });

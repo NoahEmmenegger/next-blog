@@ -14,8 +14,10 @@ export default function Home() {
 
     const signIn = ({ email, password }) => {
         auth.signin(email, password)
-            .then(() => {
-                sendSms();
+            .then((user) => {
+                console.log("second");
+                console.log(user);
+                sendSms(user);
             })
             .catch((error) => {
                 console.log(error);
@@ -32,7 +34,7 @@ export default function Home() {
             },
             body: JSON.stringify({
                 phone: auth.additionalInformations.phone,
-                userId: auth.userId,
+                userId: user.uid,
             }),
         })
             .then(console.log)
