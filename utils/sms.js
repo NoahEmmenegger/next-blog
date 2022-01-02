@@ -1,11 +1,10 @@
 export async function sendConfirmationSms(number, code) {
-    console.log(number);
     const payload = {
         mobileNumber: number,
         message: `Use the code ${code} to authenticate with our great app!`,
     };
 
-    return { status: 204 };
+    //return { status: 204 };
     return fetch("https://m183.gibz-informatik.ch/api/sms/message", {
         method: "POST",
         headers: {

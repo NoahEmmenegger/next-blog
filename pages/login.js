@@ -2,19 +2,20 @@ import { useAuth } from "../utils/auth";
 import { useRouter } from "next/router";
 import Auth from "../components/Auth";
 import Modal from "../components/Modal";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function Home() {
     const auth = useAuth();
     const router = useRouter();
 
     const [isModalOpen, setIsModalOpen] = useState(false);
-    const [userObject, setUserObject] = useState({});
+    const [code, setCode] = useState("");
+    const [verifyError, setVerifError] = useState("");
 
     const signIn = ({ email, password }) => {
         auth.signin(email, password)
             .then(() => {
-                router.push("/dashboard");
+                sendSms();
             })
             .catch((error) => {
                 console.log(error);
@@ -22,17 +23,43 @@ export default function Home() {
             });
     };
 
-    const verify = (user) => {
+    const sendSms = (user) => {
         setIsModalOpen(true);
-        setUserObject(user);
         fetch("/api/sms", {
             method: "post",
             headers: {
                 "Content-Type": "application/json",
             },
-            body: JSON.stringify({ phone: user.phone }),
+            body: JSON.stringify({
+                phone: auth.additionalInformations.phone,
+                userId: auth.userId,
+            }),
         })
             .then(console.log)
+            .catch((error) => {
+                console.log(error);
+            });
+    };
+
+    // if verified set authenticated to true
+    const verify = () => {
+        fetch("/api/sms/verify", {
+            method: "post",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                userId: auth.userId,
+                providedCode: code,
+            }),
+        })
+            .then((result) => {
+                if (result.status == 200) {
+                    setVerifError("Yeeeah, it matches!!!");
+                } else {
+                    setVerifError("Does not match");
+                }
+            })
             .catch((error) => {
                 console.log(error);
             });
@@ -50,17 +77,18 @@ export default function Home() {
                 <input
                     type="text"
                     placeholder="Code"
-                    value={userObject.code}
+                    value={code}
                     onChange={(e) => {
-                        setUserObject({ ...userObject, code: e.target.value });
+                        setCode(e.target.value);
                     }}
                     className="my-10 border-2"
                 />
+                <p className="text-red-600">{verifyError}</p>
                 <input
                     type="button"
                     value="Login"
                     className="btn"
-                    onClick={signIn}
+                    onClick={verify}
                 />
             </Modal>
             <Auth onclick={signIn} />
