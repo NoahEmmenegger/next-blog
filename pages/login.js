@@ -56,6 +56,7 @@ export default function Home() {
             .then((result) => {
                 if (result.status == 200) {
                     setVerifError("Yeeeah, it matches!!!");
+                    router.push("/dashboard");
                 } else {
                     setVerifError("Does not match");
                 }

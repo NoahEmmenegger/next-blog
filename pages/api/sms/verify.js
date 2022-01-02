@@ -11,7 +11,7 @@ export default async function verify(req, res) {
     const secretObj = await getSecrets(userId);
 
     if (secretObj.sms.code == providedCode) {
-        updateProtected(userId, { smsAuth: new Date() });
+        await updateProtected(userId, { smsAuth: true });
         res.status(200).json({
             message: 200,
         });

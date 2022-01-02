@@ -4,6 +4,7 @@ import "firebase/auth";
 import { firebase } from "./firebase";
 import { getUserById, updateUser } from "./user";
 import { protectedCodes } from "../pages/api/sms";
+import { getProtected, updateProtected } from "./userProtected";
 
 const authContext = createContext();
 
@@ -19,6 +20,7 @@ export const useAuth = () => {
 function useProvideAuth() {
     const [user, setUser] = useState(null);
     const [additionalInformations, setAdditionalInformations] = useState(null);
+    const [isFullyAuthenticated, setIsFullyAuthenticated] = useState(false);
 
     useEffect(() => {
         if (additionalInformations) {
@@ -30,6 +32,9 @@ function useProvideAuth() {
         async function init() {
             if (user) {
                 setAdditionalInformations(await getUserById(user.uid));
+            }
+            if (user && user.uid) {
+                setIsFullyAuthenticated((await getProtected(user.uid)).smsAuth);
             }
         }
 
@@ -47,6 +52,7 @@ function useProvideAuth() {
             .auth()
             .signInWithEmailAndPassword(email, password)
             .then((response) => {
+                console.log(response);
                 setUser(response.user);
                 return response.user;
             });
@@ -81,7 +87,9 @@ function useProvideAuth() {
             .auth()
             .signOut()
             .then(() => {
+                updateProtected(user.uid, { smsAuth: false });
                 setUser(false);
+                setIsFullyAuthenticated(false);
             });
     };
 
@@ -121,6 +129,7 @@ function useProvideAuth() {
         userId: user && user.uid,
         user: user,
         additionalInformations,
+        isFullyAuthenticated,
         setAdditionalInformations,
         signin,
         signinWithProvider,
