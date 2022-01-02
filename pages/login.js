@@ -14,8 +14,8 @@ export default function Home() {
 
     const signIn = ({ email, password }) => {
         auth.signin(email, password)
-            .then(() => {
-                sendSms();
+            .then(async () => {
+                setIsModalOpen(true);
             })
             .catch((error) => {
                 console.log(error);
@@ -23,8 +23,13 @@ export default function Home() {
             });
     };
 
+    useEffect(() => {
+        if (auth.additionalInformations) {
+            sendSms();
+        }
+    }, [auth.additionalInformations]);
+
     const sendSms = () => {
-        setIsModalOpen(true);
         console.log(auth.additionalInformations);
         fetch("/api/sms", {
             method: "post",
