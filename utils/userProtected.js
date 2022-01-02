@@ -1,5 +1,30 @@
 import { firestore } from "./firebase";
 
+export function updateProtected(userId, newObj) {
+    return new Promise((res, rej) => {
+        firestore
+            .collection("users")
+            .doc(userId)
+            .collection("protected")
+            .doc("protected")
+            .set(newObj)
+            .then(() => res(true));
+    });
+}
+
+export async function getProtected(userId) {
+    const user = await (
+        await firestore
+            .collection("users")
+            .doc(userId)
+            .collection("protected")
+            .doc("protected")
+            .get()
+    ).data();
+
+    return user;
+}
+
 export function updateSecret(userId, code) {
     console.log("joo");
     return new Promise((res, rej) => {
@@ -27,6 +52,8 @@ export async function getSecrets(userId) {
             .doc("secrets")
             .get()
     ).data();
+
+    console.log(user);
 
     if (!user) {
         return {

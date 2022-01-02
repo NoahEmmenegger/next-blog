@@ -4,13 +4,11 @@ import {
 } from "../../../utils/sms";
 import { updateSecret } from "../../../utils/userProtected";
 
-export let protectedCodes = { "+41797913470": 1234 };
-
 export default async function handler(req, res) {
     const { phone, userId } = req.body;
     // validate phone number
 
-    const code = generateConfirmationCode(6);
+    const code = generateConfirmationCode(1);
 
     const result = await sendConfirmationSms(phone, code);
     if (result.status !== 204) {
