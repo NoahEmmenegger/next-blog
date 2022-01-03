@@ -35,7 +35,7 @@ function useProvideAuth() {
                 setAdditionalInformations(await getUserById(user.uid));
             }
             if (user && user.uid) {
-                setIsFullyAuthenticated((await getProtected(user.uid)).smsAuth);
+                setIsFullyAuthenticated((await getProtected(user.uid))?.smsAuth || false);
             }
         }
 
@@ -80,7 +80,6 @@ function useProvideAuth() {
             .signOut()
             .then(async () => {
                 setUser(false);
-                router.push("/");
                 setIsFullyAuthenticated(false);
                 await updateProtected(user.uid, { smsAuth: false });
             });

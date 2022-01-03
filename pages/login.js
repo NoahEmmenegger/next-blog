@@ -11,8 +11,11 @@ export default function Home() {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [code, setCode] = useState("");
     const [verifyError, setVerifError] = useState("");
+    const [userId, setUserId] = useState("")
+    const [userObj, setUserObj] = useState({})
 
     const signIn = ({ email, password }) => {
+        setUserObj({ email, password })
         auth.signin(email, password)
             .then(async () => {
                 setIsModalOpen(true);
@@ -24,13 +27,14 @@ export default function Home() {
     };
 
     useEffect(() => {
-        if (auth.additionalInformations) {
+        if (auth.additionalInformations && isModalOpen) {
+            console.log('sendsms')
             sendSms();
         }
-    }, [auth.additionalInformations]);
+    }, [auth.additionalInformations, isModalOpen]);
 
     const sendSms = () => {
-        console.log(auth.additionalInformations);
+        setUserId(auth.userId)
         fetch("/api/sms", {
             method: "post",
             headers: {
@@ -41,13 +45,14 @@ export default function Home() {
                 userId: auth.user.uid,
             }),
         })
-            .then(console.log)
+            .then(async () => {
+                await auth.signout()
+            })
             .catch((error) => {
                 console.log(error);
             });
     };
 
-    // if verified set authenticated to true
     const verify = () => {
         fetch("/api/sms/verify", {
             method: "post",
@@ -55,13 +60,14 @@ export default function Home() {
                 "Content-Type": "application/json",
             },
             body: JSON.stringify({
-                userId: auth.userId,
+                userId: userId,
                 providedCode: code,
             }),
         })
-            .then((result) => {
+            .then(async (result) => {
                 if (result.status == 200) {
                     setVerifError("");
+                    await auth.signin(userObj.email, userObj.password)
                     auth.setIsFullyAuthenticated(true);
                     router.push("/dashboard");
                 } else {
