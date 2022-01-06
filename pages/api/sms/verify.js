@@ -1,12 +1,7 @@
-import { firebase, firestore } from "../../../utils/firebase/clientApp";
 import { getSecrets, updateProtected } from "../../../utils/userProtected";
 
 export default async function verify(req, res) {
     const { userId, providedCode } = req.body;
-
-    await firebase
-        .auth()
-        .signInWithEmailAndPassword("backend@gmail.com", "backend");
 
     const secretObj = await getSecrets(userId);
 

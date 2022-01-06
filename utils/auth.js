@@ -3,7 +3,6 @@ import "firebase/auth";
 
 import { firebase } from "./firebase/clientApp";
 import { getUserById, updateUser } from "./user";
-import { getProtected, updateProtected } from "./userProtected";
 import { useRouter } from "next/router";
 
 const authContext = createContext();
@@ -35,7 +34,7 @@ function useProvideAuth() {
                 setAdditionalInformations(await getUserById(user.uid));
             }
             if (user && user.uid) {
-                setIsFullyAuthenticated((await getProtected(user.uid))?.smsAuth || false);
+                //setIsFullyAuthenticated((await getProtected(user.uid))?.smsAuth || false);
             }
         }
 
@@ -81,7 +80,7 @@ function useProvideAuth() {
             .then(async () => {
                 setUser(false);
                 setIsFullyAuthenticated(false);
-                await updateProtected(user.uid, { smsAuth: false });
+                //await updateProtected(user.uid, { smsAuth: false });
             });
     };
 
