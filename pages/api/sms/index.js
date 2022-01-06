@@ -2,7 +2,7 @@ import {
     generateConfirmationCode,
     sendConfirmationSms,
 } from "../../../utils/sms";
-import { firebase } from "../../../utils/firebase";
+import { firebase } from "../../../utils/firebase/clientApp";
 import { updateSecret } from "../../../utils/userProtected";
 
 export default async function handler(req, res) {

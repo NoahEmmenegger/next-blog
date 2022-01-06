@@ -1,4 +1,4 @@
-import { firestore, firebase } from "./firebase";
+import { firestore, firebase } from "./firebase/clientApp";
 
 const createPost = async (ownerId, title, description, status) => {
     let document = firestore.collection("posts").doc();
@@ -18,7 +18,7 @@ const getPosts = async () => {
     const snapshot = await firestore
         .collection("posts")
         .orderBy("createDate", "desc")
-        .get().catch(() => {return {docs: []}});
+        .get().catch(() => { return { docs: [] } });
     return snapshot.docs.map((doc) => {
         let post = doc.data();
         post.id = doc.id;

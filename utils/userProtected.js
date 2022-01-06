@@ -1,4 +1,4 @@
-import { firestore } from "./firebase";
+import { firestore } from "./firebase/clientApp";
 
 export function updateProtected(userId, newObj) {
     return new Promise((res, rej) => {

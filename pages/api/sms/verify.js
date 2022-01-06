@@ -1,4 +1,4 @@
-import { firebase, firestore } from "../../../utils/firebase";
+import { firebase, firestore } from "../../../utils/firebase/clientApp";
 import { getSecrets, updateProtected } from "../../../utils/userProtected";
 
 export default async function verify(req, res) {

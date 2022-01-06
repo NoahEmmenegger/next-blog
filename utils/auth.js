@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext, createContext } from "react";
 import "firebase/auth";
 
-import { firebase } from "./firebase";
+import { firebase } from "./firebase/clientApp";
 import { getUserById, updateUser } from "./user";
 import { getProtected, updateProtected } from "./userProtected";
 import { useRouter } from "next/router";

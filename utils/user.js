@@ -1,4 +1,4 @@
-import { firestore } from "./firebase";
+import { firestore } from "./firebase/clientApp";
 
 export function updateUser(userId, user) {
     return new Promise((res, rej) => {
