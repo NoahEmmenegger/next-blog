@@ -1,6 +1,6 @@
 export async function sendConfirmationSms(number, code) {
     const payload = {
-        mobileNumber: number,
+        mobileNumber: number, // darf nicht mit + beginnen
         message: `Use the code ${code} to authenticate with our great app!`,
     };
 
