@@ -34,6 +34,7 @@ function useProvideAuth() {
                 setAdditionalInformations(await getUserById(user.uid));
             }
             if (user && user.uid) {
+                setIsFullyAuthenticated(true);
                 //setIsFullyAuthenticated((await getProtected(user.uid))?.smsAuth || false);
             }
         }
