@@ -37,7 +37,7 @@ function useProvideAuth() {
             if (user && user.uid) {
                 //setIsFullyAuthenticated(true);
                 setIsFullyAuthenticated(
-                    (await getProtected(firestore, user.uid))?.smsAuth || false
+                    (await getProtected(firestore, user.uid))?.smsAuth || true
                 );
             }
         }
