@@ -1,9 +1,10 @@
 import React, { useState, useEffect, useContext, createContext } from "react";
 import "firebase/auth";
 
-import { firebase } from "./firebase/clientApp";
+import { firebase, firestore } from "./firebase/clientApp";
 import { getUserById, updateUser } from "./user";
 import { useRouter } from "next/router";
+import { getProtected } from "./userProtected";
 
 const authContext = createContext();
 
@@ -34,8 +35,10 @@ function useProvideAuth() {
                 setAdditionalInformations(await getUserById(user.uid));
             }
             if (user && user.uid) {
-                setIsFullyAuthenticated(true);
-                //setIsFullyAuthenticated((await getProtected(user.uid))?.smsAuth || false);
+                //setIsFullyAuthenticated(true);
+                setIsFullyAuthenticated(
+                    (await getProtected(firestore, user.uid))?.smsAuth || false
+                );
             }
         }
 

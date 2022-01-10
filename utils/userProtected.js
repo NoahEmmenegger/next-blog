@@ -1,11 +1,7 @@
-import admin from "./firebase/nodeApp";
-
-const db = admin.firestore()
-
-export function updateProtected(userId, newObj) {
+export function updateProtected(db, userId, newObj) {
+    console.log("ja");
     return new Promise((res, rej) => {
-        db
-            .collection("users")
+        db.collection("users")
             .doc(userId)
             .collection("protected")
             .doc("protected")
@@ -14,7 +10,7 @@ export function updateProtected(userId, newObj) {
     });
 }
 
-export async function getProtected(userId) {
+export async function getProtected(db, userId) {
     const user = await (
         await db
             .collection("users")
@@ -27,10 +23,9 @@ export async function getProtected(userId) {
     return user;
 }
 
-export function updateSecret(userId, code) {
+export function updateSecret(db, userId, code) {
     return new Promise((res, rej) => {
-        db
-            .collection("users")
+        db.collection("users")
             .doc(userId)
             .collection("protected")
             .doc("secrets")
@@ -44,7 +39,7 @@ export function updateSecret(userId, code) {
     });
 }
 
-export async function getSecrets(userId) {
+export async function getSecrets(db, userId) {
     const user = await (
         await db
             .collection("users")

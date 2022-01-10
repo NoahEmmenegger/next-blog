@@ -1,12 +1,15 @@
 import { getSecrets, updateProtected } from "../../../utils/userProtected";
+import admin from "../../../utils/firebase/nodeApp";
 
 export default async function verify(req, res) {
     const { userId, providedCode } = req.body;
 
-    const secretObj = await getSecrets(userId);
+    const db = admin.firestore();
+
+    const secretObj = await getSecrets(db, userId);
 
     if (secretObj.sms.code == providedCode) {
-        await updateProtected(userId, { smsAuth: true });
+        await updateProtected(db, userId, { smsAuth: true });
         res.status(200).json({
             message: 200,
         });
