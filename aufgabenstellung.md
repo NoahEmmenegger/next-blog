@@ -63,7 +63,7 @@ ID Anforderung / Aufgabe Punkte
 • API Token (Übermittelt als URL Parameter oder HTTP Request Header)
 • HTTP Digest Authentication
 Die Verwendung einer («echten») Session zur Authentifikation an der API ist hier nicht zulässig! / 2
-5.3 Unter /api/posts werden alle öffentlichen Posts im JSON-Format ausgege-ben. / 1
+5.3 ✔️ Unter /api/posts werden alle öffentlichen Posts im JSON-Format ausgege-ben. / 1
 
 # 3.6 Verschiedenes [7 Punkte]
 
