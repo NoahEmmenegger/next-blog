@@ -11,11 +11,12 @@ export default function Home() {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [code, setCode] = useState("");
     const [verifyError, setVerifError] = useState("");
-    const [userId, setUserId] = useState("")
-    const [userObj, setUserObj] = useState({})
+    const [userId, setUserId] = useState("");
+    const [userObj, setUserObj] = useState({});
+    const [hasSent, setHasSent] = useState(false);
 
     const signIn = ({ email, password }) => {
-        setUserObj({ email, password })
+        setUserObj({ email, password });
         auth.signin(email, password)
             .then(async () => {
                 setIsModalOpen(true);
@@ -27,14 +28,15 @@ export default function Home() {
     };
 
     useEffect(() => {
-        if (auth.additionalInformations && isModalOpen) {
-            console.log('sendsms')
+        if (auth.additionalInformations && isModalOpen && !hasSent) {
+            console.log("sendsms");
             sendSms();
+            setHasSent(true);
         }
     }, [auth.additionalInformations, isModalOpen]);
 
     const sendSms = () => {
-        setUserId(auth.userId)
+        setUserId(auth.userId);
         fetch("/api/sms", {
             method: "post",
             headers: {
@@ -46,7 +48,7 @@ export default function Home() {
             }),
         })
             .then(async () => {
-                await auth.signout()
+                await auth.signout();
             })
             .catch((error) => {
                 console.log(error);
@@ -67,7 +69,7 @@ export default function Home() {
             .then(async (result) => {
                 if (result.status == 200) {
                     setVerifError("");
-                    await auth.signin(userObj.email, userObj.password)
+                    await auth.signin(userObj.email, userObj.password);
                     auth.setIsFullyAuthenticated(true);
                     router.push("/dashboard");
                 } else {
@@ -81,7 +83,13 @@ export default function Home() {
 
     return (
         <>
-            <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
+            <Modal
+                isOpen={isModalOpen}
+                onClose={() => {
+                    setIsModalOpen(false);
+                    setHasSent(false);
+                }}
+            >
                 <h1>Verify your phone number</h1>
                 <p>Wir haben Ihnen ein SMS auf die vorherige Email gesendet.</p>
                 <p>
