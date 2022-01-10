@@ -1,4 +1,5 @@
 import { firestore, firebase } from "./firebase/clientApp";
+import { getUserById } from "./user";
 
 const createPost = async (ownerId, title, description, status) => {
     let document = firestore.collection("posts").doc();
@@ -18,7 +19,10 @@ const getPosts = async () => {
     const snapshot = await firestore
         .collection("posts")
         .orderBy("createDate", "desc")
-        .get().catch(() => { return { docs: [] } });
+        .get()
+        .catch(() => {
+            return { docs: [] };
+        });
     return snapshot.docs.map((doc) => {
         let post = doc.data();
         post.id = doc.id;
@@ -66,13 +70,38 @@ const getPostById = async (postId) => {
 };
 
 const getPostComments = async (postId) => {
-    const snapshot = await firestore.collection("posts").doc(postId).collection('comments').get()
+    const snapshot = await firestore
+        .collection("posts")
+        .doc(postId)
+        .collection("comments")
+        .get();
     return snapshot.docs.map((doc) => {
         let comment = doc.data();
+        let userName = getUserById(comment.userId);
         comment.id = doc.id;
         return comment;
     });
-}
+};
+
+const createComment = async (
+    postId,
+    content = "Test Kommentar",
+    userId = "4U3jCONstTdwxrWROAHbYqLRTUd2"
+) => {
+    console.log("Test 1");
+    let document = firestore
+        .collection("posts")
+        .doc(postId)
+        .collection("comments")
+        .doc();
+
+    console.log("Test log");
+
+    await document.set({
+        content: content,
+        userId: userId,
+    });
+};
 
 const removePostById = async (postId) => {
     return await firestore.collection("posts").doc(postId).delete();
@@ -86,7 +115,7 @@ const updatePost = async (post) => {
             .set(post)
             .then(() => res(true));
     });
-}
+};
 
 export {
     getPosts,
@@ -95,5 +124,6 @@ export {
     getUserPostsById,
     getPublicPosts,
     removePostById,
-    updatePost
+    updatePost,
+    createComment,
 };

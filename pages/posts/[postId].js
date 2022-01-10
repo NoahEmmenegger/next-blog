@@ -1,5 +1,6 @@
 import { useAuth } from "../../utils/auth";
 import { getPostById } from "../../utils/post";
+import { createComment } from "../../utils/post";
 import Custom404 from "../404";
 
 export default function Post({ post }) {
@@ -15,7 +16,13 @@ export default function Post({ post }) {
             <p>{post.description}</p>
             <div>
                 {auth.isFullyAuthenticated && (
-                    <form className="card m-10 p-5">
+                    <form
+                        className="card m-10 p-5"
+                        onSubmit={(event) => {
+                            event.preventDefault();
+                            return false;
+                        }}
+                    >
                         <p>Your Comment:</p>
                         <textarea
                             id="w3review"
@@ -27,6 +34,7 @@ export default function Post({ post }) {
                             type="submit"
                             value="Submit"
                             className="btn w-1/4 m-auto mr-0 mt-5"
+                            onClick={() => createComment(post.id)}
                         ></input>
                     </form>
                 )}
