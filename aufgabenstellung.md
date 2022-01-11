@@ -14,7 +14,7 @@ ID Anforderung / Aufgabe Punkte
 2.3 ✔️ Ein Login-Formular für die Eingabe der Benutzerdaten (Username & Passwort) ist erreichbar und funktionsfähig. / 2
 2.4 ✔️ Beim Absenden des Login-Formulars wird geprüft ob ein/-e Benutzer/-in mit dem angegebenen Benutzernamen überhaupt existiert. / 1
 2.5 ✔️ Falls ein/-e entsprechende/-r Benutzer/-in existiert (siehe 2.4) wird ein zufälli-ges SMS Token generiert. / 1
-2.6 Das SMS Token wird mit einer maximalen Gültigkeit von 5 Minuten gespei-chert. / 1
+2.6 ✔️ Das SMS Token wird mit einer maximalen Gültigkeit von 5 Minuten gespei-chert. / 1
 2.7 ✔️ Das generiere und persistierte SMS Token wird an die entsprechende Mobilte-lefonnummer gesendet. / 1
 2.8 ✔️ Nach dem Versand des SMS Tokens wird eines neues/erweitertes Login-Formulars für die Eingabe des SMS-Tokens angezeigt. / 1
 2.9 ✔️ Nach dem Absenden des zweiten Login-Formulars werden die Benutzerdaten (Benutzername/Passwort) und das SMS Token validiert. / 1

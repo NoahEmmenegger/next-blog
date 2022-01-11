@@ -74,7 +74,7 @@ export default function Home() {
                     auth.setIsFullyAuthenticated(true);
                     router.push("/dashboard");
                 } else {
-                    setVerifError("Does not match");
+                    setVerifError("Does not match or has expired.");
                 }
             })
             .catch((error) => {

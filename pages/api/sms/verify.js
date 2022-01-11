@@ -8,7 +8,9 @@ export default async function verify(req, res) {
 
     const secretObj = await getSecrets(db, userId);
 
-    if (secretObj.sms.code == providedCode) {
+    const isFromLastFiveMinutes = (secretObj.sms.timestamp._seconds + 300) > (Date.now() / 1000)
+
+    if (secretObj.sms.code == providedCode && isFromLastFiveMinutes) {
         await updateProtected(db, userId, { smsAuth: true });
         res.status(200).json({
             message: 200,
