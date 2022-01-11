@@ -2,6 +2,7 @@ import Link from "next/link";
 import { useAuth } from "../utils/auth";
 import { useRouter } from "next/router";
 import { useState } from "react";
+import Image from "next/image"
 
 export default function Auth({ onclick, isRegister, error }) {
     const { signinWithProvider } = useAuth();
@@ -12,13 +13,15 @@ export default function Auth({ onclick, isRegister, error }) {
     const [username, setUsername] = useState("");
     const [phone, setPhone] = useState("");
 
+    const [providerError, setProviderError] = useState("")
+
     return (
         <form
             action="#"
             className="min-h-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8"
             onSubmit={(event) => {
+                console.log('ja')
                 event.preventDefault();
-                onclick({ email, password, phone, username });
                 return false;
             }}
         >
@@ -112,7 +115,7 @@ export default function Auth({ onclick, isRegister, error }) {
                     </div>
                 </div>
 
-                <div className="flex items-center justify-between">
+                {/* <div className="flex items-center justify-between">
                     <div className="text-sm">
                         <a
                             href="#"
@@ -121,31 +124,48 @@ export default function Auth({ onclick, isRegister, error }) {
                             Forgot your Password?
                         </a>
                     </div>
-                </div>
+                </div> */}
 
                 <p className="text-red-600">{error}</p>
 
                 <div>
                     <input
                         type="submit"
+                        onClick={() => {
+                            onclick({ email, password, phone, username });
+                        }}
                         className="btn"
                         value={isRegister ? "Sign-In" : "Log-In"}
                     />
                 </div>
-                <input
-                    type="button"
-                    value="google"
-                    onClick={() =>
-                        signinWithProvider()
-                            .then(() => {
-                                router.push("/dashboard");
-                            })
-                            .catch((error) => {
-                                console.log(error);
-                                console.log("An error occurred.");
-                            })
-                    }
-                />
+                <div>
+                    <p className="text-red-600">{providerError}</p>
+                    <button
+                        className="provider"
+                        onClick={() => {
+                            signinWithProvider()
+                                .then(() => {
+                                    router.push("/dashboard");
+                                })
+                                .catch((error) => {
+                                    setProviderError(error.message)
+                                    console.log(error);
+                                    console.log("An error occurred.");
+                                })
+                        }}
+                    >
+                        <div className="p-4">
+                            <div className="h-7 w-7 relative p-3">
+                                <Image
+                                    alt="google logo"
+                                    src="/icons/oAuth/google.svg"
+                                    layout="fill"
+                                />
+                            </div>
+                        </div>
+                        <span className="my-auto">Sign in with Google</span>
+                    </button>
+                </div>
             </div>
         </form>
     );

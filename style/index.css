@@ -20,4 +20,8 @@
   .card {
     @apply bg-white rounded-3xl shadow-lg;
   }
+
+  .provider {
+    @apply border-2 rounded-lg w-full relative my-5 flex flex-row align-middle;
+}
 }
