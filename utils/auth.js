@@ -85,6 +85,7 @@ function useProvideAuth() {
                 setUser(false);
                 setIsFullyAuthenticated(false);
                 //await updateProtected(user.uid, { smsAuth: false });
+                router.push("/login");
             });
     };
 

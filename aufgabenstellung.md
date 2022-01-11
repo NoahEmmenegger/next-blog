@@ -20,9 +20,9 @@ ID Anforderung / Aufgabe Punkte
 2.9 ✔️ Nach dem Absenden des zweiten Login-Formulars werden die Benutzerdaten (Benutzername/Passwort) und das SMS Token validiert. / 1
 2.10 Wenn die Benutzerdaten sowie das SMS Token korrekt sind, wird eine Session erzeugt und das verwendete SMS Token gelöscht. / 1
 2.11 ✔️ Die Benutzerin bzw. der Benutzer wird zum Dashboard weitergeleitet, welches der Rolle der angemeldeten Benutzerin bzw. des angemeldeten Benutzers entspricht. / 1
-2.12 Es wird eine Fehlermeldung angezeigt, wenn einer der zuvor genannten Punk-te aus technischen Gründen fehlschlägt. / 1
+2.12 ✔️ Es wird eine Fehlermeldung angezeigt, wenn einer der zuvor genannten Punk-te aus technischen Gründen fehlschlägt. / 1
 2.13 Nach 3 fehlgeschlagenen Login-Versuchen wird die Benutzerin bzw. der Be-nutzer für 5 Minuten blockiert (während diesem Zeitraum sind keine weiteren Logins möglich). / 1
-2.14 Beim Logout wird die aktuelle Session beendet. Es findet zudem eine Weiter-leitung zum Login-Formular statt. / 1
+2.14 ✔️ Beim Logout wird die aktuelle Session beendet. Es findet zudem eine Weiter-leitung zum Login-Formular statt. / 1
 2.15 Es existiert eine Möglichkeit, bei Nicht-Verfügbarkeit der erfassten Mobiltele-fonnummer ein Login durchzuführen. / 2
 2.16 Die im Rahmen der Registrierung eingegebene Mobiltelefonnummer kann durch Benutzende selbständig geändert werden. Missbräuchlichen Manipula-tionen wird angemessen vorgebeugt. / 2
 
