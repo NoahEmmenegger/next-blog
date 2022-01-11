@@ -74,6 +74,7 @@ export default function Auth({ onclick, isRegister, error }) {
                                 <label htmlFor="phone" className="sr-only">
                                     Phone Number
                                 </label>
+                                Phone number must start with 41 and must have 11 numbers
                                 <input
                                     id="phone"
                                     name="phone"
