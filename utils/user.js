@@ -15,9 +15,10 @@ export function updateUser(userId, user) {
     });
 }
 
-export async function getUserById(userId) {
+export async function getUserById(db, userId) {
+    console.log(userId)
     const user = await (
-        await firestore.collection("users").doc(userId).get()
+        await db.collection("users").doc(userId).get()
     ).data();
 
     if (!user) {

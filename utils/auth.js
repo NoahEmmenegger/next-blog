@@ -32,7 +32,7 @@ function useProvideAuth() {
     useEffect(() => {
         async function init() {
             if (user) {
-                setAdditionalInformations(await getUserById(user.uid));
+                setAdditionalInformations(await getUserById(firestore, user.uid));
             }
             if (user && user.uid) {
                 //setIsFullyAuthenticated(true);

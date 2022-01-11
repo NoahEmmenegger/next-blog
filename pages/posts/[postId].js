@@ -40,13 +40,13 @@ export default function Post({ post }) {
                 )}
                 {post.comments
                     ? post.comments.map((comment, index) => {
-                          return (
-                              <div className="card m-10 p-5" key={index}>
-                                  <p className="font-bold">{comment.userId}</p>
-                                  <p>{comment.content}</p>
-                              </div>
-                          );
-                      })
+                        return (
+                            <div className="card m-10 p-5" key={index}>
+                                <p className="font-bold">{comment.userName}</p>
+                                <p>{comment.content}</p>
+                            </div>
+                        );
+                    })
                     : "No Comments"}
             </div>
         </div>

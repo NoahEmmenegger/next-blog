@@ -1,5 +1,5 @@
+import axios from "axios";
 import { firestore, firebase } from "./firebase/clientApp";
-import { getUserById } from "./user";
 
 const createPost = async (ownerId, title, description, status) => {
     let document = firestore.collection("posts").doc();
@@ -12,7 +12,7 @@ const createPost = async (ownerId, title, description, status) => {
         createDate: firebase.firestore.Timestamp.fromDate(new Date()),
     });
 
-    return await getPostById(document.id);
+    //return await getPostById(document.id);
 };
 
 const getPosts = async () => {
@@ -66,6 +66,8 @@ const getPostById = async (postId) => {
     post.createDate = post.createDate.seconds;
     post.comments = await getPostComments(postId);
 
+    console.log(post.comments)
+
     return post;
 };
 
@@ -75,12 +77,14 @@ const getPostComments = async (postId) => {
         .doc(postId)
         .collection("comments")
         .get();
-    return snapshot.docs.map((doc) => {
+    const maping = snapshot.docs.map(async (doc) => {
         let comment = doc.data();
-        let userName = getUserById(comment.userId);
+        comment.userName = (await axios.get(`http://localhost:3000/api/user?userId=${comment.userId}`)).data.username;
         comment.id = doc.id;
         return comment;
     });
+
+    return await Promise.all(maping)
 };
 
 const createComment = async (
