@@ -10,6 +10,7 @@ export default function Home() {
 
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [code, setCode] = useState("");
+    const [error, setError] = useState("")
     const [verifyError, setVerifError] = useState("");
     const [userId, setUserId] = useState("");
     const [userObj, setUserObj] = useState({});
@@ -22,8 +23,8 @@ export default function Home() {
                 setIsModalOpen(true);
             })
             .catch((error) => {
+                setError(error.message)
                 console.log(error);
-                console.log("An error occurred.");
             });
     };
 
@@ -113,7 +114,7 @@ export default function Home() {
                     onClick={verify}
                 />
             </Modal>
-            <Auth onclick={signIn} />
+            <Auth onclick={signIn} error={error} />
         </>
     );
 }
