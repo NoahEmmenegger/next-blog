@@ -78,7 +78,10 @@ export default function Auth({ onclick, isRegister, error }) {
                                     id="phone"
                                     name="phone"
                                     type="tel"
+                                    pattern="^41.*"
                                     autoComplete="phone"
+                                    minLength="11"
+                                    maxLength="11"
                                     required
                                     className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                                     placeholder="phone"
