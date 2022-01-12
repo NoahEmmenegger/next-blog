@@ -22,6 +22,7 @@ export default function Auth({ onclick, isRegister, error }) {
             onSubmit={(event) => {
                 console.log('ja')
                 event.preventDefault();
+                onclick({ email, password, phone, username });
                 return false;
             }}
         >
@@ -131,9 +132,6 @@ export default function Auth({ onclick, isRegister, error }) {
                 <div>
                     <input
                         type="submit"
-                        onClick={() => {
-                            onclick({ email, password, phone, username });
-                        }}
                         className="btn"
                         value={isRegister ? "Sign-In" : "Log-In"}
                     />
