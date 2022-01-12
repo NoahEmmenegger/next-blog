@@ -10,7 +10,7 @@ ID Anforderung / Aufgabe Punkte
 
 ID Anforderung / Aufgabe Punkte
 2.1 ✔️ Ein Formular für die Benutzer-Registrierung ist erreichbar und funktionsfähig. / 2
-2.2 Relevante Benutzereingaben werden während bzw. nach dem Registrierungs-prozess angemessen validiert. / 2
+2.2 ✔️ Relevante Benutzereingaben werden während bzw. nach dem Registrierungs-prozess angemessen validiert. / 2
 2.3 ✔️ Ein Login-Formular für die Eingabe der Benutzerdaten (Username & Passwort) ist erreichbar und funktionsfähig. / 2
 2.4 ✔️ Beim Absenden des Login-Formulars wird geprüft ob ein/-e Benutzer/-in mit dem angegebenen Benutzernamen überhaupt existiert. / 1
 2.5 ✔️ Falls ein/-e entsprechende/-r Benutzer/-in existiert (siehe 2.4) wird ein zufälli-ges SMS Token generiert. / 1

@@ -1,14 +1,18 @@
 import { firestore } from "../../../utils/firebase/clientApp";
 
-const getPublicPosts = async () => {
+const getPublicPosts = async (req, res) => {
+    // todo: muss noch geschützt werden mit API TOKEN
+
     const snapshot = await firestore
         .collection("posts")
         .where("status", "==", "public")
         .get();
-    return snapshot.docs.map((doc) => {
-        let post = doc.data();
-        const jsonPost = JSON.stringify(post)
-        return jsonPost;
+    const posts = snapshot.docs.map((doc) => {
+        return doc.data();
+    });
+
+    res.status(200).json({
+        posts
     });
 };
 
