@@ -68,7 +68,7 @@ Die Verwendung einer («echten») Session zur Authentifikation an der API ist hi
 # 3.6 Verschiedenes [7 Punkte]
 
 ID Anforderung / Aufgabe Punkte
-6.1 Die gesamte Applikation ist bestmöglich vor Clickjacking-Attacken geschützt. / 2
+6.1 ✔️ Die gesamte Applikation ist bestmöglich vor Clickjacking-Attacken geschützt. / 2
 6.2 ✔️ Für die Authentifizierung kann mindestens ein externer Provider (Google, Facebook, Twitter, GitHub, …) verwendet werden. / 2
 6.3 Die Publikation von versteckten Posts durch Admins ist durch die Eingabe eines time-based one-time password (TOTP) geschützt. Das TOTP kann entwe-der bei jeder Publikation oder einmalig bei der ersten Publikation je Session eingegeben werden. / 3
 
