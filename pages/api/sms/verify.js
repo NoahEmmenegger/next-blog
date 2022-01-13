@@ -1,4 +1,4 @@
-import { getSecrets, updateProtected } from "../../../utils/userProtected";
+import { getSecrets, updateProtected, updateSecret } from "../../../utils/userProtected";
 import admin from "../../../utils/firebase/nodeApp";
 
 export default async function verify(req, res) {
@@ -12,6 +12,7 @@ export default async function verify(req, res) {
 
     if (secretObj.sms.code == providedCode && isFromLastFiveMinutes) {
         await updateProtected(db, userId, { smsAuth: true });
+        await updateSecret(db, userId, "")
         res.status(200).json({
             message: 200,
         });
