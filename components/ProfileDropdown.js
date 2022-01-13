@@ -14,7 +14,7 @@ export default function ProfileDropdown() {
                 className={`btn font-bold uppercase ${isOpen ? "rounded-b-none rounded-t-lg" : ""
                     }`}
             >
-                {auth.user.email}
+                {auth.additionalInformations.username}
             </button>
             {isOpen ? (
                 <div className="absolute btn w-full p-10 z-20 rounded-b-lg">

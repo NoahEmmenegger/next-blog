@@ -83,7 +83,7 @@ export default function Auth({ onclick, isRegister, error }) {
                                     id="phone"
                                     name="phone"
                                     type="tel"
-                                    pattern="^41.*"
+                                    pattern="^41[0-9]*$"
                                     autoComplete="phone"
                                     minLength="11"
                                     maxLength="11"
