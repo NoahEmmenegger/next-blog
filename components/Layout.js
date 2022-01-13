@@ -4,6 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
+import ProfileDropdown from "./ProfileDropdown";
 
 export default function Layout({ children }) {
     const auth = useAuth();
@@ -62,9 +63,7 @@ export default function Layout({ children }) {
                             </li>
                         )}
                         {auth.isFullyAuthenticated ? (
-                            <button onClick={auth.signout} className="btn">
-                                Logout
-                            </button>
+                            <ProfileDropdown />
                         ) : (
                             <Link href="/login">
                                 <a className="btn">Log-In</a>
@@ -97,7 +96,7 @@ export default function Layout({ children }) {
                     </ul>
                     {auth.isFullyAuthenticated ? (
                         <div className="m-2 btn w-1/12">
-                            <button onClick={auth.signout}>Logout</button>
+                            <ProfileDropdown />
                         </div>
                     ) : (
                         <Link href="/login">
