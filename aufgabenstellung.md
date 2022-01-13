@@ -24,7 +24,7 @@ ID Anforderung / Aufgabe Punkte
 2.13 Nach 3 fehlgeschlagenen Login-Versuchen wird die Benutzerin bzw. der Be-nutzer für 5 Minuten blockiert (während diesem Zeitraum sind keine weiteren Logins möglich). / 1
 2.14 ✔️ Beim Logout wird die aktuelle Session beendet. Es findet zudem eine Weiter-leitung zum Login-Formular statt. / 1
 2.15 Es existiert eine Möglichkeit, bei Nicht-Verfügbarkeit der erfassten Mobiltele-fonnummer ein Login durchzuführen. / 2
-2.16 Die im Rahmen der Registrierung eingegebene Mobiltelefonnummer kann durch Benutzende selbständig geändert werden. Missbräuchlichen Manipula-tionen wird angemessen vorgebeugt. / 2
+2.16 ✔️ Die im Rahmen der Registrierung eingegebene Mobiltelefonnummer kann durch Benutzende selbständig geändert werden. Missbräuchlichen Manipula-tionen wird angemessen vorgebeugt. / 2
 
 # 3.3 Geschützer Bereich [7 Punkte]
 
@@ -52,13 +52,13 @@ ID Anforderung / Aufgabe Punkte
 • Maximal 200 Zeichen
 • Verhinderung von SQL-Injections
 • Verhinderung von XSS-Attacken / 2
-4.7 Es ist nicht möglich via URL-Tampering verborgene oder gelöschte Posts anzu-sehen. / 1
+4.7 ✔️ Es ist nicht möglich via URL-Tampering verborgene oder gelöschte Posts anzu-sehen. / 1
 4.8 ✔️ Die IDs von Posts können nicht (einfach) erraten werden (URL-Tampering). / 1
 
 # 3.5 API für Posts [4 Punkte]
 
 ID Anforderung / Aufgabe Punkte
-5.1 Unter /api soll eine JSON-Api für die Posts erstellt werden. / 1
+5.1 ✔️ Unter /api soll eine JSON-Api für die Posts erstellt werden. / 1
 5.2 Der Zugriff auf die API ist durch eine der folgenden Methoden geschützt:
 • API Token (Übermittelt als URL Parameter oder HTTP Request Header)
 • HTTP Digest Authentication
