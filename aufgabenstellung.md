@@ -38,7 +38,7 @@ ID Anforderung / Aufgabe Punkte
 - hidden  published
 - hidden  deleted
 - published  deleted / 2
-  3.6 Die Dashboards sind vor einer URL-Tampering Attacke geschützt. / 1
+ ✔️ 3.6 Die Dashboards sind vor einer URL-Tampering Attacke geschützt. / 1
 
 # Öffentliche Startseite [9 Punkte]
 
