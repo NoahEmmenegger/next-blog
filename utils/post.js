@@ -108,7 +108,7 @@ const createComment = async (
 };
 
 const removePostById = async (postId) => {
-    return await firestore.collection("posts").doc(postId).delete();
+    return await firestore.collection("posts").doc(postId).update({status: "deleted"});
 };
 
 const updatePost = async (post) => {

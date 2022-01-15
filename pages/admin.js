@@ -27,12 +27,13 @@ export default function Admin() {
                                 <AdminPost
                                     key={post.id}
                                     post={post}
+                                    status={post.status}
                                     onUpdatePost={(updatedPost) => {
                                         const updatedPosts = [...posts];
                                         if (updatedPost) {
                                             updatedPosts[index] = updatedPost;
                                         } else {
-                                            updatedPosts.splice(index, 1);
+                                            window.location.reload(true)
                                         }
                                         setPosts(updatedPosts);
                                     }}

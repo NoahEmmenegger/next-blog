@@ -42,6 +42,7 @@ export default function AdminPost({ post, onUpdatePost }) {
                 <div className="w-full align-middle my-auto">
                     <h2>{post.title}</h2>
                     <p>{post.description}</p>
+                    <p>{post.status}</p>
                 </div>
                 <div
                     onClick={() => setOpenModal(true)}

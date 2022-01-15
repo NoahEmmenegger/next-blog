@@ -33,12 +33,12 @@ ID Anforderung / Aufgabe Punkte
 3.2 ✔️ Das Admin-Dashboard (für Admins) zeigt eine Liste der Posts aller Benutzerin-nen und Benutzer an (unabhängig vom Status; inkl. gelöschte Posts). / 1
 3.3 Benutzende können neue Posts erfassen. Neue Posts sind nach der Erstellung versteckt (Status = hidden). / 1
 3.4 Benutzende können die selbst erstellen Posts unabhängig von deren Status löschen (Status = deleted). / 1
-3.5 Admins können den Status existierender Posts mutieren:
+3.5 ✔️ Admins können den Status existierender Posts mutieren:
 
-- hidden  published
-- hidden  deleted
-- published  deleted / 2
- ✔️ 3.6 Die Dashboards sind vor einer URL-Tampering Attacke geschützt. / 1
+-   hidden  published
+-   hidden  deleted
+-   published  deleted / 2
+    ✔️ 3.6 Die Dashboards sind vor einer URL-Tampering Attacke geschützt. / 1
 
 # Öffentliche Startseite [9 Punkte]
 
