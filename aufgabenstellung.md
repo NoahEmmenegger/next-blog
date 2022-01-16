@@ -75,13 +75,13 @@ ID Anforderung / Aufgabe Punkte
 # 3.7 Logging [6 Punkte]
 
 ID Anforderung / Aufgabe Punkte
-7.1 Erstellen Sie ein Konzept, welches wesentliche Aspekte für das Logging hin-sichtlich Applikationssicherheit umfasst. / 3
+7.1 ✔️ Erstellen Sie ein Konzept, welches wesentliche Aspekte für das Logging hin-sichtlich Applikationssicherheit umfasst. / 3
 7.2 Die Applikation verfügt über angemessene Massnahmen zur Erkennung und Auswertung sicherheitsrelevanter Vorfälle (Logging). / 3
 
 # 3.8 Begründung und Nachvollziehbarkeit [7 Punkte]
 
 ID Anforderung / Aufgabe Punkte
-8.1 Erklären und begründen Sie das eingesetzte Verfahren zur Speicherung von Passwörtern hinsichtlich Sicherheit nachvollziehbar und fachlich korrekt. / 2
-8.2 Begründen Sie den allfälligen Einsatz von Bibliotheken und externen Code-Bestandteilen nachvollziehbar und fachlich korrekt. / 2
-8.3 Erklären Sie nachvollziehbar und fachlich korrekt, inwiefern Ihre Applikation vor Cross-Site-Scripting Attacken (XSS-Attacken) geschützt ist. / 2
-8.4 Stellen Sie Zugangsdaten für jeweils mindestens eine/-n Benutzer/-in aller Benutzerrollen in einer spezifischen README.md Datei auf Wurzelebene Ihres Projekts zur Verfügung. / 1
+8.1 ✔️ Erklären und begründen Sie das eingesetzte Verfahren zur Speicherung von Passwörtern hinsichtlich Sicherheit nachvollziehbar und fachlich korrekt. / 2
+8.2 ✔️ Begründen Sie den allfälligen Einsatz von Bibliotheken und externen Code-Bestandteilen nachvollziehbar und fachlich korrekt. / 2
+8.3 ✔️ Erklären Sie nachvollziehbar und fachlich korrekt, inwiefern Ihre Applikation vor Cross-Site-Scripting Attacken (XSS-Attacken) geschützt ist. / 2
+8.4 ✔️ Stellen Sie Zugangsdaten für jeweils mindestens eine/-n Benutzer/-in aller Benutzerrollen in einer spezifischen README.md Datei auf Wurzelebene Ihres Projekts zur Verfügung. / 1
