@@ -7,7 +7,7 @@ import { removePostById, updatePost } from "../../utils/post";
 export default function AdminPost({ post, onUpdatePost }) {
     const [isHover, setIsHover] = useState(false);
     const [isModalOpen, setOpenModal] = useState(false);
-    const [newPost, setNewPost] = useState(post)
+    const [newPost, setNewPost] = useState(post);
 
     const cancelButtonRef = useRef(null);
     if (!post) {
@@ -28,7 +28,9 @@ export default function AdminPost({ post, onUpdatePost }) {
             <div
                 onClick={() => {
                     removePostById(post.id);
-                    onUpdatePost(null);
+                    const newPost = post;
+                    newPost.status = "deleted";
+                    onUpdatePost(newPost);
                 }}
                 className={
                     "top-1 right-1 cursor-pointer" +
@@ -81,7 +83,10 @@ export default function AdminPost({ post, onUpdatePost }) {
                                                 value={newPost.title}
                                                 ini
                                                 onChange={(e) => {
-                                                    setNewPost({...newPost, title: e.target.value})
+                                                    setNewPost({
+                                                        ...newPost,
+                                                        title: e.target.value,
+                                                    });
                                                 }}
                                             />
                                         </div>
@@ -96,7 +101,11 @@ export default function AdminPost({ post, onUpdatePost }) {
                                                     placeholder="Description"
                                                     value={newPost.description}
                                                     onChange={(e) => {
-                                                        setNewPost({...newPost, description: e.target.value})
+                                                        setNewPost({
+                                                            ...newPost,
+                                                            description:
+                                                                e.target.value,
+                                                        });
                                                     }}
                                                 />
                                             </div>
@@ -111,9 +120,18 @@ export default function AdminPost({ post, onUpdatePost }) {
                                                     id="checkbox"
                                                     type="checkbox"
                                                     onChange={(e) => {
-                                                        setNewPost({...newPost, status: e.target.checked?"public":"private"})
+                                                        setNewPost({
+                                                            ...newPost,
+                                                            status: e.target
+                                                                .checked
+                                                                ? "public"
+                                                                : "private",
+                                                        });
                                                     }}
-                                                    checked={newPost.status==="public"}
+                                                    checked={
+                                                        newPost.status ===
+                                                        "public"
+                                                    }
                                                     className="relative peer z-20 text-purple-600 rounded-md focus:ring-0"
                                                 />
                                                 <span className="ml-2 relative z-20">
@@ -134,10 +152,8 @@ export default function AdminPost({ post, onUpdatePost }) {
                             className="btn"
                             onClick={() => {
                                 setOpenModal(false);
-                                updatePost(
-                                    newPost
-                                );
-                                onUpdatePost(newPost)
+                                updatePost(newPost);
+                                onUpdatePost(newPost);
                             }}
                         >
                             Save

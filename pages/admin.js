@@ -33,7 +33,7 @@ export default function Admin() {
                                         if (updatedPost) {
                                             updatedPosts[index] = updatedPost;
                                         } else {
-                                            window.location.reload(true)
+                                            updatedPosts.splice(index, 1);
                                         }
                                         setPosts(updatedPosts);
                                     }}
