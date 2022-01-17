@@ -29,7 +29,7 @@ export default function Post({ post }) {
                     >
                         <p>Your Comment:</p>
                         <textarea
-                            maxlength="200"
+                            maxLength="200"
                             id="commentContent"
                             name="commentContent"
                             rows="3"
