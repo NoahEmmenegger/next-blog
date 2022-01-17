@@ -12,6 +12,18 @@ const createPost = async (ownerId, title, description, status) => {
         createDate: firebase.firestore.Timestamp.fromDate(new Date()),
     });
 
+    const date = new Date()
+     fetch("/api/logs", {
+            method: "post",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                fileName: 'createPostLogs.txt',
+                data: `${ownerId} / ${date} / ${title} \n`,
+            }),
+        })
+
     //return await getPostById(document.id);
 };
 
@@ -111,9 +123,33 @@ const createComment = async (
         content: content,
         userId: userId,
     });
+
+    const date = new Date()
+     fetch("/api/logs", {
+            method: "post",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                fileName: 'createPostCommentLogs.txt',
+                data: `${postId} / ${userId} / ${date} / ${content} \n`,
+            }),
+        })
 };
 
 const removePostById = async (postId) => {
+        const date = new Date()
+        fetch("/api/logs", {
+                method: "post",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    fileName: 'deletePost.txt',
+                    data: `${postId} / ${date} \n`,
+                }),
+            })
+
     return await firestore
         .collection("posts")
         .doc(postId)
@@ -121,6 +157,18 @@ const removePostById = async (postId) => {
 };
 
 const updatePost = async (post) => {
+        const date = new Date()
+        fetch("/api/logs", {
+                method: "post",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    fileName: 'updatePostLogs.txt',
+                    data: `${post.id} / ${date} \n`,
+                }),
+            })
+
     return new Promise((res, rej) => {
         firestore
             .collection("posts")
