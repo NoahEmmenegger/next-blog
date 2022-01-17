@@ -2,8 +2,13 @@
 
 # Benutzer
 
-E-Mail: admin@gmail.com
-Passwort: qwer1234
+-   Admin
+    E-Mail: admin@gmail.com
+    Passwort: qwer1234
+
+-   Normaler Benutzer
+    E-Mail: benutzer@gmail.com
+    Passwort: qwer1234
 
 # Anleitung
 
@@ -24,10 +29,10 @@ Wenn wir uns nach diesem Konzept richten sollten wir die nötigen Logging inform
 # Erklärungen
 
 -   Speicherung von Passwörter
-    Die von uns genutzte Datenbank Firebase von Google unterstützt uns durch ihre fortgeschrittene Technologie. Wir können in Firebase ganz einfach neue Benutzer erstellen, diese werden dann in der Datenbank unter strengen Bedingungen abgespeichert. Firebase haltet ebenfalls die EU Normen zum Datenschutz ein (EU General Data Protection Regulation - GDPR). Wir als Entwickler der Software (next-blog) können nichteinmal das Passwort unserer Benutzer einsehen, wir können dieses jedoch zurücksetzen oder (den Benutzer) löschen. Die Firebase/Firestore Cloud DB hat auch diverse Standard Security Zertifizierungen (ISO 27001, ISO 27017, ISO 27018, SOC 1, SOC 2, SOC 3). Einige Restriktionen wie zum Beispiel das Speichern des User-Agents und der IP-Adresse werden von Firebase selbst schon getätigt um diverse Angriffe schon vorab beim Login / Authentication Prozess zu verhindern.
+    Die von uns genutzte Datenbank, Firebase von Google, unterstützt uns durch ihre fortgeschrittene Technologie. Wir können in Firebase ganz einfach neue Benutzer erstellen, diese werden dann in der Datenbank unter strengen Bedingungen abgespeichert. Die Passwörter werden mit scrypt gehasht, in der Firebase console können wir den hashing algorythmus definieren und auch einige Parameter einstellen wie z.B den salt separator oder die Anzahl Runden welche durchlaufen werden. Firebase haltet ebenfalls die EU Normen zum Datenschutz ein (EU General Data Protection Regulation - GDPR). Wir als Entwickler der Software (next-blog) können nichteinmal das Passwort unserer Benutzer einsehen, wir können dieses jedoch zurücksetzen oder (den Benutzer) löschen. Die Firebase/Firestore Cloud DB hat auch diverse Standard Security Zertifizierungen (ISO 27001, ISO 27017, ISO 27018, SOC 1, SOC 2, SOC 3). Einige Restriktionen wie zum Beispiel das Speichern des User-Agents und der IP-Adresse werden von Firebase selbst schon getätigt um diverse Angriffe schon vorab beim Login / Authentication Prozess zu verhindern. Da Firebase von Google kommt und schon ziemlich breit verwendet wird sind Sicherheitslücken ein bisschen schwieriger zu finden, und falls eine aufkommen sollte, dann würde sie direkt von Google behoben werden.
 
-    Für noch genauere Informationen können Sie sich gerne die Firebase Docs zur Privacy and Security anschauen:
-    https://firebase.google.com/support/privacy/
+    Für noch genauere Informationen:
+    https://firebaseopensource.com/projects/firebase/scrypt/
 
 -   Verwendete Bibliotheken und externe Code-Bestandteile
     Für unsere Blog Applikation haben wir uns für folgende Tools entschieden:
@@ -45,7 +50,7 @@ Wenn wir uns nach diesem Konzept richten sollten wir die nötigen Logging inform
         Für das schöne Design dürfen wir uns bei Tailwind bedanken, wir nutzen Tailwind für das Styling der Komponenten in einer einfachen Inline-Variante.
 
 -   Schutz vor Cross-Site-Scripting (XSS) Attacken
-    Dank unserem Einsatz von NextJS können wir mittels eines Konfigurationsfile XSS Attacken vorbeugen. Dabei fügen wir die XSS-Protection in unserem next.config.js hinzu. Dabei werden zum Beispiel in unseren Eingabefelder code in String umgewandelt und behandelt wie normaler Text. Somit kann der Code nicht ausgeführt werden und es löst auch keine Attacke aus.
+    Dank unserem Einsatz von NextJS können wir mittels eines Konfigurationsfile XSS Attacken vorbeugen. Dabei fügen wir die XSS-Protection in unserem next.config.js hinzu. Dabei werden zum Beispiel in unseren Eingabefelder code in String umgewandelt und behandelt wie normaler Text. Ein zusätzlicher Schutzfaktor bietet ebenfalls firebase selbst. Somit kann der Code nicht ausgeführt werden und es löst auch keine Attacke aus.
 
     Mehr dazu gibts in der NextJS Dokumentation:
     https://nextjs.org/docs/advanced-features/security-headers
