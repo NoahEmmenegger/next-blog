@@ -12,7 +12,21 @@
 
 # Anleitung
 
--   Hier Schritt für Schritt Anleitung fürs Aufsetzen
+Nachfolgend sind die Schritte beschrieben, welche ausgeführt werden müssen um das Projekt aufzusetzen und zu starten.
+
+
+
+Aufsetzen:
+- Datei .env.local.example duplizieren.
+- Die Kopie in .env.local umbenennen
+
+- Befehl "npm ci" ausführen
+
+
+
+
+Starten:
+- Befehl "npm run dev" ausführen
 
 # Logging Konzept
 
