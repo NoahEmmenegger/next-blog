@@ -14,19 +14,16 @@
 
 Nachfolgend sind die Schritte beschrieben, welche ausgeführt werden müssen um das Projekt aufzusetzen und zu starten.
 
-
-
 Aufsetzen:
-- Datei .env.local.example duplizieren.
-- Die Kopie in .env.local umbenennen
 
-- Befehl "npm ci" ausführen
+-   Datei .env.local.example duplizieren.
+-   Die Kopie in .env.local umbenennen
 
-
-
+-   Befehl "npm ci" ausführen
 
 Starten:
-- Befehl "npm run dev" ausführen
+
+-   Befehl "npm run dev" ausführen
 
 # Logging Konzept
 
@@ -68,3 +65,76 @@ Wenn wir uns nach diesem Konzept richten sollten wir die nötigen Logging inform
 
     Mehr dazu gibts in der NextJS Dokumentation:
     https://nextjs.org/docs/advanced-features/security-headers
+
+# Firebase rules
+
+Der Vorteil von Firebase ist, dass man Daten direkt auf Datenbank ebene schützen kann. Dazu kann man Firebase rules hinzufügen. In diesen Rules kann man "programmmieren", wie und ob ein Zugriff zugelassen soll. Wir haben folgende regeln definiert:
+
+
+
+```javascript
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Global functions
+    function isAuth() {
+        return request.auth != null;
+    }
+     
+   	function isAdmin() {
+        return get(/databases/$(database)/documents/users/$(request.auth.uid)).data.isAdmin == true;
+    }
+    
+  	// user
+    match /users/{userId} {
+       allow read, write: if request.auth != null && request.auth.uid == userId;
+    }
+    
+    // user protected
+    match /users/{userId}/protected/protected {
+       allow read, write: if true;
+    }
+    
+    // user secrets
+    match /users/{userId}/protected/secrets {
+       allow read, write: if false;
+    }
+    
+    // post
+    match /posts/{postId} {
+    	 allow create: if isAuth() && isGivenUser();
+       allow update: if isAuth() && (isPostOwner() || isAdmin());
+       allow delete: if isAdmin();
+       allow read: if isPublic() || isPostOwner() || isAdmin();
+       
+       function isPublic() {
+       		return resource.data.status == "public";
+       }
+       
+       function isPostOwner() {
+       		return resource.data.ownerId == request.auth.uid;
+       } 
+       
+      	function isGivenUser(){
+      		return request.auth.uid == request.resource.data.ownerId;
+      	}
+    }
+    
+    // comments
+    match /posts/{postId}/comments/{commentId} {
+    	allow read: if true;
+      allow write, create: if isAuth() && isGivenUser() && isEnoughShort();
+      allow delete: if isAdmin();
+      
+      function isGivenUser(){
+      	return request.auth.uid == request.resource.data.userId;
+      }
+      
+      function isEnoughShort(){
+      	return request.resource.data.content.size() <= 200
+      }
+    }
+  }
+}
+```
+
