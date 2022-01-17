@@ -92,10 +92,9 @@ export default function Home() {
                 }}
             >
                 <h1>Verify your phone number</h1>
-                <p>Wir haben Ihnen ein SMS auf die vorherige Email gesendet.</p>
+                <p>We have sent you a message on the reigstrated number.</p>
                 <p>
-                    Bitte geben Sie den erhaltenen Code im unten stehenden Feld
-                    ein:
+                    Please Enter your 5-digit code below:
                 </p>
                 <input
                     type="text"

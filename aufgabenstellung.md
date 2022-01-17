@@ -31,8 +31,8 @@ ID Anforderung / Aufgabe Punkte
 ID Anforderung / Aufgabe Punkte
 3.1 ✔️ Das User-Dashboard (für Nicht-Admins) zeigt eine Liste aller Posts der jeweils aktuell angemeldeten Benutzerin bzw. des jeweils aktuell angemeldeten Be-nutzers an („eigene Posts“). / 1
 3.2 ✔️ Das Admin-Dashboard (für Admins) zeigt eine Liste der Posts aller Benutzerin-nen und Benutzer an (unabhängig vom Status; inkl. gelöschte Posts). / 1
-3.3 Benutzende können neue Posts erfassen. Neue Posts sind nach der Erstellung versteckt (Status = hidden). / 1
-3.4 Benutzende können die selbst erstellen Posts unabhängig von deren Status löschen (Status = deleted). / 1
+3.3 ✔️ Benutzende können neue Posts erfassen. Neue Posts sind nach der Erstellung versteckt (Status = hidden). / 1
+3.4 ✔️ Benutzende können die selbst erstellen Posts unabhängig von deren Status löschen (Status = deleted). / 1
 3.5 ✔️ Admins können den Status existierender Posts mutieren:
 
 -   hidden  published
