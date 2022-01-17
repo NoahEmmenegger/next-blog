@@ -8,15 +8,19 @@ import admin from "../../../utils/firebase/nodeApp";
 export default async function handler(req, res) {
     const { phone, userId } = req.body;
 
-    const db = admin.firestore();
+    if (!phone.match(/^41[0-9]*$/gm || phone.length !== 11)) {
+        return res.status(400).json({
+            message:
+                "Your Phone number is saved in the wrong format. Please contact the adminstrators.",
+        });
+    }
 
-    // validate phone number
+    const db = admin.firestore();
 
     const code = generateConfirmationCode(5);
 
     const result = await sendConfirmationSms(phone, code);
 
-    //console.log(result);
     if (result.status !== 204) {
         res.status(result.status).json({
             message: "This phone number is not whitelisted!",

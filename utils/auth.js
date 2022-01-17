@@ -32,7 +32,9 @@ function useProvideAuth() {
     useEffect(() => {
         async function init() {
             if (user) {
-                setAdditionalInformations(await getUserById(firestore, user.uid));
+                setAdditionalInformations(
+                    await getUserById(firestore, user.uid)
+                );
             }
             if (user && user.uid) {
                 //setIsFullyAuthenticated(true);
@@ -51,18 +53,18 @@ function useProvideAuth() {
             .signInWithEmailAndPassword(email, password);
         setUser(response.user);
 
-         const date = new Date()
+        const date = new Date();
         fetch("/api/logs", {
-                method: "post",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify({
-                    fileName: 'signInLogs.txt',
-                    data: `${email} / ${date} \n`,
-                }),
-            })
-            
+            method: "post",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                fileName: "signInLogs.txt",
+                data: `${email} / ${date} \n`,
+            }),
+        });
+
         return response.user;
     };
 
@@ -75,17 +77,17 @@ function useProvideAuth() {
                 setAdditionalInformations({
                     username: response.user.displayName,
                 });
-                 const date = new Date()
+                const date = new Date();
                 fetch("/api/logs", {
-                        method: "post",
-                        headers: {
-                            "Content-Type": "application/json",
-                        },
-                        body: JSON.stringify({
-                            fileName: 'signInWithProviderLogs.txt',
-                            data: `${response.user.displayName} / ${date} \n`,
-                        }),
-                    })
+                    method: "post",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({
+                        fileName: "signInWithProviderLogs.txt",
+                        data: `${response.user.displayName} / ${date} \n`,
+                    }),
+                });
                 return response.user;
             });
     };
@@ -98,17 +100,17 @@ function useProvideAuth() {
                 setUser(response.user);
                 setAdditionalInformations({ phone, username });
 
-                 const date = new Date()
+                const date = new Date();
                 fetch("/api/logs", {
-                        method: "post",
-                        headers: {
-                            "Content-Type": "application/json",
-                        },
-                        body: JSON.stringify({
-                            fileName: 'signUpLogs.txt',
-                            data: `${email} / ${date} \n`,
-                        }),
-                    })
+                    method: "post",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({
+                        fileName: "signUpLogs.txt",
+                        data: `${email} / ${date} \n`,
+                    }),
+                });
 
                 return response.user;
             });
@@ -120,8 +122,8 @@ function useProvideAuth() {
             .signOut()
             .then(async () => {
                 setUser(false);
+                setAdditionalInformations(null);
                 setIsFullyAuthenticated(false);
-                //await updateProtected(user.uid, { smsAuth: false });
                 router.push("/login");
             });
     };

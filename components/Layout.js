@@ -62,7 +62,8 @@ export default function Layout({ children }) {
                                 <Link href="/register">Register</Link>
                             </li>
                         )}
-                        {auth.isFullyAuthenticated ? (
+                        {auth.isFullyAuthenticated &&
+                        auth.additionalInformations ? (
                             <ProfileDropdown />
                         ) : (
                             <Link href="/login">
@@ -94,7 +95,8 @@ export default function Layout({ children }) {
                             <Link href="/register">Register</Link>
                         </li>
                     </ul>
-                    {auth.isFullyAuthenticated ? (
+                    {auth.isFullyAuthenticated &&
+                    auth.additionalInformations ? (
                         <div className="m-2 btn w-1/12">
                             <ProfileDropdown />
                         </div>

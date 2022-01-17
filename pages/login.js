@@ -10,7 +10,8 @@ export default function Home() {
 
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [code, setCode] = useState("");
-    const [error, setError] = useState("")
+    const [error, setError] = useState("");
+    const [smsError, setSmsError] = useState("");
     const [verifyError, setVerifError] = useState("");
     const [userId, setUserId] = useState("");
     const [userObj, setUserObj] = useState({});
@@ -23,13 +24,16 @@ export default function Home() {
                 setIsModalOpen(true);
             })
             .catch((error) => {
-                setError(error.message)
+                setError(error.message);
                 console.log(error);
             });
     };
 
     useEffect(() => {
         if (auth.additionalInformations && isModalOpen && !hasSent) {
+            setUserId(auth.userId);
+            auth.signout();
+
             console.log("sendsms");
             sendSms();
             setHasSent(true);
@@ -37,7 +41,6 @@ export default function Home() {
     }, [auth.additionalInformations, isModalOpen]);
 
     const sendSms = () => {
-        setUserId(auth.userId);
         fetch("/api/sms", {
             method: "post",
             headers: {
@@ -48,10 +51,16 @@ export default function Home() {
                 userId: auth.user.uid,
             }),
         })
-            .then(async () => {
-                await auth.signout();
+            .then(async (result) => {
+                console.log(result);
+                if (result.status !== 200) {
+                    setSmsError(
+                        "We couldn't send you a text message. There is probably no SMS for this account or the SMS is not in the expected format. Please contact an administrator."
+                    );
+                }
             })
             .catch((error) => {
+                console.log("ja");
                 console.log(error);
             });
     };
@@ -91,27 +100,34 @@ export default function Home() {
                     setHasSent(false);
                 }}
             >
-                <h1>Verify your phone number</h1>
-                <p>We have sent you a message on the reigstrated number.</p>
-                <p>
-                    Please Enter your 5-digit code below:
-                </p>
-                <input
-                    type="text"
-                    placeholder="Code"
-                    value={code}
-                    onChange={(e) => {
-                        setCode(e.target.value);
-                    }}
-                    className="my-10 border-2"
-                />
-                <p className="text-red-600">{verifyError}</p>
-                <input
-                    type="button"
-                    value="Login"
-                    className="btn"
-                    onClick={verify}
-                />
+                {!smsError ? (
+                    <>
+                        <h1>Verify your phone number</h1>
+                        <p>
+                            We have sent you a message on the reigstrated
+                            number.
+                        </p>
+                        <p>Please Enter your 5-digit code below:</p>
+                        <input
+                            type="text"
+                            placeholder="Code"
+                            value={code}
+                            onChange={(e) => {
+                                setCode(e.target.value);
+                            }}
+                            className="my-10 border-2"
+                        />
+                        <p className="text-red-600">{verifyError}</p>
+                        <input
+                            type="button"
+                            value="Login"
+                            className="btn"
+                            onClick={verify}
+                        />
+                    </>
+                ) : (
+                    <div className="text-red-600">{smsError}</div>
+                )}
             </Modal>
             <Auth onclick={signIn} error={error} />
         </>
