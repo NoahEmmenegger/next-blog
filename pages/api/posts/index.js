@@ -1,8 +1,17 @@
 import { firestore } from "../../../utils/firebase/clientApp";
 
 const getPublicPosts = async (req, res) => {
-    // todo: muss noch geschützt werden mit API TOKEN
+    if (req.method !== "GET") {
+        console.log("test0");
+        return res.status(405).json({ message: "Wrong Method" });
+    }
 
+    if (req.query.token !== process.env.API_Token) {
+        console.log("test1");
+        return res.status(401).json({ message: "Unauthorized" });
+    }
+
+    console.log("test2");
     const snapshot = await firestore
         .collection("posts")
         .where("status", "==", "public")
@@ -12,8 +21,8 @@ const getPublicPosts = async (req, res) => {
     });
 
     res.status(200).json({
-        posts
+        posts,
     });
 };
 
-export default getPublicPosts
+export default getPublicPosts;
