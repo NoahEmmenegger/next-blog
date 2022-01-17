@@ -76,7 +76,7 @@ ID Anforderung / Aufgabe Punkte
 
 ID Anforderung / Aufgabe Punkte
 7.1 ✔️ Erstellen Sie ein Konzept, welches wesentliche Aspekte für das Logging hin-sichtlich Applikationssicherheit umfasst. / 3
-7.2 Die Applikation verfügt über angemessene Massnahmen zur Erkennung und Auswertung sicherheitsrelevanter Vorfälle (Logging). / 3
+7.2 ✔️ Die Applikation verfügt über angemessene Massnahmen zur Erkennung und Auswertung sicherheitsrelevanter Vorfälle (Logging). / 3
 
 # 3.8 Begründung und Nachvollziehbarkeit [7 Punkte]
 
