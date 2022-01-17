@@ -17,6 +17,8 @@ export default function Home() {
     const [userObj, setUserObj] = useState({});
     const [hasSent, setHasSent] = useState(false);
 
+    console.log(auth.additionalInformations);
+
     const signIn = ({ email, password }) => {
         setUserObj({ email, password });
         auth.signin(email, password)
