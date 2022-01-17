@@ -8,12 +8,12 @@ export default function handler(req, res) {
         res.status(200).json({
             message: "logging successfull",
         });
-    }
-
-    fs.mkdirSync('./logs');
+    } else {
+        fs.mkdirSync('./logs');
     fs.appendFile(`./logs/${req.body.fileName}`, `${req.body.data}`)
 
         res.status(200).json({
             message: "logging successfull",
         });
+    }
 }
