@@ -1,18 +1,19 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useAuth } from "../utils/auth";
 import Custom404 from "./404";
 
 export default function Profile() {
     const auth = useAuth();
 
-    const [newUsername, setNewUsername] = useState(
-        auth.additionalInformations.username
-    );
-    const [newPhone, setNewPhone] = useState(auth.additionalInformations.phone);
+    const [newUsername, setNewUsername] = useState("");
+    const [newPhone, setNewPhone] = useState("");
 
-    if (!auth.additionalInformations) {
-        return <Custom404 />;
-    }
+    useEffect(() => {
+        if (auth.additionalInformations) {
+            setNewUsername(auth.additionalInformations.username);
+            setNewPhone(auth.additionalInformations.phone);
+        }
+    }, [auth.additionalInformations]);
 
     return (
         <form
