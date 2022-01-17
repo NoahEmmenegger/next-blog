@@ -65,8 +65,9 @@ const getPostById = async (postId) => {
 
     post.createDate = post.createDate.seconds;
     post.comments = await getPostComments(postId);
+    post.id = postId;
 
-    console.log(post.comments)
+    console.log(post.comments);
 
     return post;
 };
@@ -79,12 +80,16 @@ const getPostComments = async (postId) => {
         .get();
     const maping = snapshot.docs.map(async (doc) => {
         let comment = doc.data();
-        comment.userName = (await axios.get(`http://localhost:3000/api/user?userId=${comment.userId}`)).data.username;
+        comment.userName = (
+            await axios.get(
+                `http://localhost:3000/api/user?userId=${comment.userId}`
+            )
+        ).data.username;
         comment.id = doc.id;
         return comment;
     });
 
-    return await Promise.all(maping)
+    return await Promise.all(maping);
 };
 
 const createComment = async (
@@ -92,6 +97,7 @@ const createComment = async (
     content = "Test Kommentar",
     userId = "4U3jCONstTdwxrWROAHbYqLRTUd2"
 ) => {
+    console.log(postId);
     console.log("Test 1");
     let document = firestore
         .collection("posts")
@@ -108,7 +114,10 @@ const createComment = async (
 };
 
 const removePostById = async (postId) => {
-    return await firestore.collection("posts").doc(postId).update({status: "deleted"});
+    return await firestore
+        .collection("posts")
+        .doc(postId)
+        .update({ status: "deleted" });
 };
 
 const updatePost = async (post) => {
