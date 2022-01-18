@@ -2,7 +2,7 @@ import Link from "next/link";
 import { useAuth } from "../utils/auth";
 import { useRouter } from "next/router";
 import { useState } from "react";
-import Image from "next/image";
+import Image from "next/image"
 
 export default function Auth({ onclick, isRegister, error }) {
     const { signinWithProvider } = useAuth();
@@ -13,14 +13,14 @@ export default function Auth({ onclick, isRegister, error }) {
     const [username, setUsername] = useState("");
     const [phone, setPhone] = useState("");
 
-    const [providerError, setProviderError] = useState("");
+    const [providerError, setProviderError] = useState("")
 
     return (
         <form
             action="#"
             className="min-h-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8"
             onSubmit={(event) => {
-                console.log("ja");
+                console.log('ja')
                 event.preventDefault();
                 onclick({ email, password, phone, username });
                 return false;
@@ -78,8 +78,7 @@ export default function Auth({ onclick, isRegister, error }) {
                                 <label htmlFor="phone" className="sr-only">
                                     Phone Number
                                 </label>
-                                Phone number must start with 41 and must have 11
-                                numbers
+                                Phone number must start with 41 and must have 11 numbers
                                 <input
                                     id="phone"
                                     name="phone"
@@ -142,14 +141,15 @@ export default function Auth({ onclick, isRegister, error }) {
                     <button
                         className="provider"
                         onClick={() => {
-                            router.push("/dashboard");
                             signinWithProvider()
-                                .then(() => {})
+                                .then(() => {
+                                    router.push("/dashboard");
+                                })
                                 .catch((error) => {
-                                    setProviderError(error.message);
+                                    setProviderError(error.message)
                                     console.log(error);
                                     console.log("An error occurred.");
-                                });
+                                })
                         }}
                     >
                         <div className="p-4">
